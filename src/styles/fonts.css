@@ -1,0 +1,208 @@
+@theme {
+  --font-primary: "Prompt", "sans-serif";
+  --font-secondary: "Inter", "sans-serif";
+}
+
+/* https://tailwindcss.com/docs/adding-custom-styles#adding-custom-utilities */
+@utility font-large-body {
+  font-family: Prompt;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 150%;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+@utility font-button {
+  font-family: var(--font-primary);
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: 0.17px;
+}
+@utility font-small-title {
+  font-family: var(--font-primary);
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: 0.3px;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+@utility font-body {
+  font-family: var(--font-primary);
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: 0.17px;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+@utility font-body-mobile {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+
+@utility font-tag {
+  font-family: var(--font-primary);
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.46px;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+@utility font-tag-mobile {
+  font-family: Prompt;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+@utility font-small {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 140%;
+  letter-spacing: 0.15px;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+@utility font-tag-caps {
+  font-family: Prompt;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 28.8px */
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+}
+@utility font-tag-caps-mobile {
+  font-family: var(--font-primary);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 120%;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+@utility font-large-title-mobile {
+  font-family: var(--font-primary);
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: 1px;
+}
+@utility font-sub-title-mobile {
+  font-family: var(--font-primary);
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 275;
+  line-height: 140%;
+}
+@utility font-sub-title {
+  font-family: var(--font-primary);
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 250;
+  line-height: 160%; /* 57.6px */
+}
+@utility font-medium-title-mobile {
+  font-family: var(--font-primary);
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+}
+@utility font-caps {
+  font-family: var(--font-primary);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 28.8px */
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+}
+@utility font-large-title {
+  font-family: var(--font-primary);
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 112px */
+  letter-spacing: 1.6px;
+}
+@utility font-medium-title {
+  font-family: var(--font-primary);
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 72px */
+  letter-spacing: 1.2px;
+}
+@utility font-giant-mobile {
+  font-family: var(--font-primary);
+  font-size: 54px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  letter-spacing: 2.16px;
+  text-transform: uppercase;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+@utility font-roadmap-date {
+  font-family: var(--font-secondary);
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  text-transform: uppercase;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+@utility font-event-section {
+  font-family: var(--font-primary);
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  letter-spacing: 3.2px;
+  text-transform: uppercase;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+@utility font-giant {
+  font-family: Prompt;
+  font-size: 194px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  letter-spacing: 9.7px;
+  text-transform: uppercase;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}

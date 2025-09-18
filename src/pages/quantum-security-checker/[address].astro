@@ -1,0 +1,19 @@
+---
+import apiClient from "@/api/client";
+import Layout from "@/components/layout/Layout.astro";
+import env from "@/config";
+import { createTranslator, getLocaleFromUrl } from "@/utils/i18n";
+import type { SEOProps } from "astro-seo";
+
+
+const locale = getLocaleFromUrl(Astro.url.pathname);
+const t = await createTranslator(locale);
+
+const metadata: SEOProps = {
+  canonical: `${env.SITE_BASE_URL}/quantum-security-checker`,
+};
+---
+
+<Layout {...metadata}>
+  <h1>Quantus Address Checker</h1>
+</Layout>

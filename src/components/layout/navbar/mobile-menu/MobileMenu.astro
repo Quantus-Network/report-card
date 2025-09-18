@@ -1,0 +1,108 @@
+---
+import Button from "@/components/ui/Button.astro";
+import SiteSocials from "@/components/ui/SiteSocials.astro";
+import SphereDecoration from "@/components/ui/SphereDecoration.astro";
+import { applyStyles } from "@/utils/apply-styles";
+import {
+  createTranslator,
+  getLocaleFromUrl,
+  getLocalizedPath,
+} from "@/utils/i18n";
+import { SITE_NAVIGATIONS } from "@/constants/site-navigations";
+
+const locale = getLocaleFromUrl(Astro.url.pathname);
+const t = await createTranslator(locale);
+---
+
+<div
+  class="mobile-menu bg-navbar-mobile-menu navbar-desktop:hidden absolute top-[139px] left-0 z-10 hidden h-[calc(100vh-64px-64px)] w-full flex-col items-center overflow-hidden px-9 py-[62px] transition-opacity"
+  id="mobile-menu"
+>
+  <SphereDecoration
+    class="absolute -top-[0.8rem] -right-[5rem] -z-10"
+    variant="1"
+    size={202}
+  />
+  <SphereDecoration
+    class="absolute top-[5.5rem] -z-10"
+    variant="2"
+    size={320}
+  />
+  <SphereDecoration
+    class="absolute -bottom-[3rem] -left-[6rem] -z-10"
+    variant="3"
+    size={283}
+  />
+  <div id="mobile-nav-links" class="flex w-full flex-col gap-4">
+    {
+      SITE_NAVIGATIONS.map((item) => (
+        <a
+          href={getLocalizedPath(locale, item.href)}
+          class={applyStyles(
+            "text-navbar-link font-large-body block transition-colors duration-200 hover:font-bold",
+          )}
+        >
+          {t(item.label)}
+        </a>
+      ))
+    }
+  </div>
+
+  <SiteSocials class="mt-8 justify-center" />
+
+  <Button href="/app" target="_self" class="mt-8">{t("navbar.cta")}</Button>
+</div>
+
+<style>
+  /* Ensure smooth transitions */
+  .mobile-menu {
+    transition:
+      opacity 0.2s ease-in-out,
+      transform 0.2s ease-in-out;
+  }
+</style>
+
+<script>
+  import { getLocaleFromUrl, getLocalizedPath } from "@/utils/i18n";
+  const locale = getLocaleFromUrl(location.pathname);
+
+  const mobileMenuButton = document.querySelector<HTMLDivElement>(
+    "#mobile-menu-button",
+  );
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const menuIcon = document.querySelector(".menu-icon");
+  const closeIcon = document.querySelector(".close-icon");
+  const mobileNavLinks = document.getElementById("mobile-nav-links");
+  const links = mobileNavLinks?.querySelectorAll("a");
+
+  const updateLinkStatus = (link: HTMLAnchorElement, isActive: boolean) => {
+    if (isActive) {
+      link.classList.add("font-bold");
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.classList.remove("font-bold");
+      link.removeAttribute("aria-current");
+    }
+  };
+
+  links?.forEach((link) => {
+    const isActive =
+      location.href === getLocalizedPath(locale, link.href) ||
+      location.pathname === getLocalizedPath(locale, link.href);
+    updateLinkStatus(link, isActive);
+
+    link.addEventListener("click", () => {
+      mobileMenu?.classList.add("hidden");
+      mobileMenu?.classList.remove("flex");
+
+      menuIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+      mobileMenuButton?.setAttribute("aria-expanded", "false");
+
+      links.forEach((val) => {
+        const isActive = val.href === getLocalizedPath(locale, link.href);
+        updateLinkStatus(val, isActive);
+      });
+    });
+  });
+</script>

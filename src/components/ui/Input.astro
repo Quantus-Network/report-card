@@ -1,0 +1,222 @@
+---
+import { applyStyles } from "@/utils/apply-styles";
+
+// InputField.astro
+export interface Props {
+  id: string;
+  title?: string;
+  label?: string;
+  type?: astroHTML.JSX.HTMLInputTypeAttribute;
+  asContact?: boolean;
+  class?: string;
+  placeholder?: string;
+  required?: boolean;
+  error?: string;
+  value?: string;
+  name?: string;
+  disabled?: boolean;
+  autocomplete?: string;
+  "aria-describedby"?: string;
+  "aria-label"?: string;
+}
+
+const {
+  id,
+  label,
+  type = "text",
+  placeholder,
+  required = false,
+  error,
+  value = "",
+  name,
+  disabled = false,
+  autocomplete,
+  "aria-describedby": ariaDescribedBy,
+  class: className,
+  asContact,
+  ...rest
+} = Astro.props;
+
+// Generate unique IDs for accessibility
+const errorId = `${id}-error`;
+
+// Combine aria-describedby values
+const describedBy =
+  [error ? errorId : "", ariaDescribedBy || ""]
+    .filter(Boolean)
+    .join(" ")
+    .trim() || undefined;
+---
+
+<div class={applyStyles("input-wrapper", className)}>
+  {
+    label && (
+      <label for={id} class={`input-label ${required ? "required" : ""}`}>
+        {label}
+      </label>
+    )
+  }
+
+  <input
+    id={id}
+    name={name || id}
+    type={type}
+    value={value}
+    placeholder={placeholder}
+    required={required}
+    disabled={disabled}
+    autocomplete={autocomplete}
+    aria-invalid={error ? "true" : "false"}
+    aria-describedby={describedBy}
+    class={applyStyles(
+      "input-field font-button",
+      error && "error",
+      asContact && "font-small contact",
+    )}
+    {...rest}
+  />
+
+  {
+    error && (
+      <div id={errorId} class="error-message" role="alert" aria-live="polite">
+        <svg
+          class="error-icon"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <span>{error}</span>
+      </div>
+    )
+  }
+
+  <!-- Screen reader only validation status -->
+  {
+    error && (
+      <span class="sr-only" aria-live="polite">
+        Error: {error}
+      </span>
+    )
+  }
+</div>
+
+<style>
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .input-label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .input-label.required::after {
+    content: " *";
+    color: var(--color-input-error);
+  }
+
+  .input-field {
+    border-radius: 100px;
+    background: var(--color-input-body);
+    border: 2px solid transparent;
+    padding: 0.625rem 1.25rem;
+    color: var(--color-input-text);
+    transition: all 0.2s ease-in-out;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .input-field.contact {
+    border-radius: var(--radius-quantus);
+    background: var(--color-form-input-body);
+    border: 1px solid var(--color-form-input-body-border);
+    color: var(--color-form-input-text);
+  }
+
+  .input-field::placeholder {
+    color: var(--color-input-text);
+  }
+
+  .input-field.contact::placeholder {
+    color: var(--color-form-input-text);
+  }
+
+  .input-field:focus {
+    border-color: var(--color-input-focus);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  }
+
+  .input-field:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #f8f9fa;
+  }
+
+  .input-field.error {
+    border-color: var(--color-input-error);
+  }
+
+  .input-field.error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+  }
+
+  .error-message {
+    color: var(--color-input-error);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .error-icon {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .input-field {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const inputs = document.querySelectorAll(".input-field");
+
+  inputs.forEach((input) => {
+    // Enhanced focus management
+    input.addEventListener("focus", function () {
+      input.setAttribute("data-focused", "true");
+    });
+
+    input.addEventListener("blur", function () {
+      input.removeAttribute("data-focused");
+    });
+  });
+</script>

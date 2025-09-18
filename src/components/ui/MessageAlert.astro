@@ -1,0 +1,78 @@
+---
+import { applyStyles } from "@/utils/apply-styles";
+
+export interface Props {
+  id: string;
+  type?: "success" | "error";
+  message?: string;
+  dismissible?: boolean;
+  hidden?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  type = "success",
+  message = "Your message here",
+  dismissible = true,
+  hidden = true,
+  class: className,
+} = Astro.props;
+
+const baseClasses = `
+  relative overflow-hidden rounded-xl p-4 backdrop-blur-md border 
+  transition-all duration-300 ease-in-out w-full font-body-mobile
+`;
+
+const typeClasses = {
+  success: `bg-green-500/20 border-green-400/30 text-green-100`,
+  error: `bg-red-500/20 border-red-400/30 text-red-100`,
+};
+---
+
+<div
+  id=`alert-${id}`
+  class={applyStyles(
+    `${baseClasses} ${typeClasses[type]} group`,
+    hidden && "hidden",
+    className,
+  )}
+>
+  <!-- Glassy shine effect -->
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50"
+  >
+  </div>
+
+  <!-- Content -->
+  <div class="relative flex items-center gap-3">
+    <p id={`alert-message-${id}`} class="flex-1 text-sm font-medium">
+      {message}
+    </p>
+
+    <!-- Dismiss button -->
+    {
+      dismissible && (
+        <button
+          class="flex-shrink-0 rounded-md p-1 transition-colors duration-200 hover:bg-white/10"
+          onclick="this.closest('.group').classList.add('hidden')"
+          aria-label="Dismiss message"
+        >
+          <svg
+            class="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      )
+    }
+  </div>
+</div>

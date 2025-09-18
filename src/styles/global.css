@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "./colors.css";
+@import "./fonts.css";
+@import "./breakpoints.css";
+
+@theme {
+  --spacing-content: 1140px;
+  --spacing-navbar: 1440px;
+  --spacing-video-introduction: 1440px;
+
+  --radius-quantus: 0.625rem;
+}
+
+@utility drop-shadow-app {
+  filter: drop-shadow(-67px 34px 6px rgba(0, 0, 0, 0.1));
+  -webkit-filter: drop-shadow(-67px 34px 6px rgba(0, 0, 0, 0.1));
+  -moz-filter: drop-shadow(-67px 34px 6px rgba(0, 0, 0, 0.1));
+}
+
+@layer base {
+  html {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-content-primary);
+    font-family: var(--font-primary);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-text-title-primary);
+  }
+
+  b,
+  strong {
+    font-weight: 600;
+  }
+}

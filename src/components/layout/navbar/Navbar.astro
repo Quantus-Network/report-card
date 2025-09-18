@@ -1,0 +1,196 @@
+---
+import { MenuIcon, XIcon } from "@lucide/astro";
+import DesktopMenu from "./desktop-menu/DesktopMenu.astro";
+import MobileMenu from "./mobile-menu/MobileMenu.astro";
+
+import BrandLogo from "@/assets/brand/brand-logo.svg";
+import BrandName from "@/assets/brand/brand-name.svg";
+
+import Separator from "@/components/ui/Separator.astro";
+import Button from "@/components/ui/Button.astro";
+import {
+  createTranslator,
+  getLocaleFromUrl,
+  getLocalizedPath,
+} from "@/utils/i18n";
+
+const locale = getLocaleFromUrl(Astro.url.pathname);
+const t = await createTranslator(locale);
+---
+
+<nav
+  id="navbar"
+  class="bg-navbar-body navbar-desktop:pt-[50px] fixed top-0 z-10 h-[139px] w-full pt-[70px] transition-opacity"
+  role="navigation"
+  aria-label="Main navigation"
+>
+  <div
+    class="navbar-desktop:px-20 navbar-desktop:pb-[50px] navbar-desktop:max-w-navbar mx-auto px-[30px] pb-[30px]"
+  >
+    <div class="flex items-center justify-between">
+      <!-- Logo/Brand -->
+      <div class="flex-shrink-0">
+        <a
+          href={getLocalizedPath(locale, "/")}
+          class="flex items-center gap-3 hover:brightness-125"
+        >
+          <BrandLogo title="Quantus's brand logo" />
+          <BrandName title="Quantus's brand name" />
+        </a>
+      </div>
+
+      <DesktopMenu />
+
+      <!-- CTA Button (Desktop) -->
+      <div class="navbar-desktop:block hidden">
+        <Button target="_self" href={getLocalizedPath(locale, "/app")}
+          >{t("navbar.cta")}</Button
+        >
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="navbar-desktop:hidden">
+        <button
+          id="mobile-menu-button"
+          type="button"
+          class="inline-flex cursor-pointer items-center justify-center rounded-md p-2 text-white"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          aria-label="Toggle main menu"
+        >
+          <span class="sr-only">Open main menu</span>
+          <!-- Menu icon (hamburger) -->
+          <MenuIcon class="menu-icon block size-5" aria-hidden="true" />
+
+          <!-- Close icon (X) -->
+          <XIcon class="close-icon hidden size-5" aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <Separator class="absolute bottom-0" />
+  <MobileMenu locale={locale} />
+</nav>
+
+<!-- Script for mobile menu toggling -->
+<script>
+  const mobileMenuButton = document.querySelector<HTMLDivElement>(
+    "#mobile-menu-button",
+  );
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const menuIcon = document.querySelector(".menu-icon");
+  const closeIcon = document.querySelector(".close-icon");
+
+  if (!mobileMenuButton || !mobileMenu || !menuIcon || !closeIcon)
+    throw Error(
+      "Mobile navbar elements can't be selected, failed attaching event listener",
+    );
+
+  mobileMenuButton.addEventListener("click", function () {
+    const isExpanded =
+      mobileMenuButton.getAttribute("aria-expanded") === "true";
+
+    // Toggle menu visibility
+    mobileMenu.classList.toggle("hidden");
+    mobileMenu.classList.toggle("flex");
+
+    // Toggle icons
+    menuIcon.classList.toggle("hidden");
+    closeIcon.classList.toggle("hidden");
+
+    // Update aria-expanded attribute
+    mobileMenuButton.setAttribute("aria-expanded", (!isExpanded).toString());
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", function (event) {
+    if (
+      !mobileMenuButton.contains(event.target as Node) &&
+      !mobileMenu.contains(event.target as Node)
+    ) {
+      if (!mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.add("hidden");
+        mobileMenu.classList.remove("flex");
+
+        menuIcon.classList.remove("hidden");
+        closeIcon.classList.add("hidden");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+      }
+    }
+  });
+
+  // Handle escape key
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && !mobileMenu.classList.contains("hidden")) {
+      mobileMenu.classList.add("hidden");
+      mobileMenu.classList.remove("flex");
+
+      menuIcon.classList.remove("hidden");
+      closeIcon.classList.add("hidden");
+      mobileMenuButton.setAttribute("aria-expanded", "false");
+      mobileMenuButton.focus();
+    }
+  });
+</script>
+
+<!-- Script for handling dissapear and appear of navbar -->
+<script>
+  const navbarEl = document.getElementById("navbar");
+
+  let prevScrollOffsetRef = 0;
+  let prevScrollDirection: "idle" | "down" | "up" = "idle";
+
+  const handleToggleOpacity = (e: Event) => {
+    // The logic here is using the navbar height as reference so we not have empty area when the navbar is hidden.
+    const isLgWidth = window?.innerWidth >= 992;
+    const isMdWidth = window?.innerWidth >= 768;
+    const isXsWidth = window?.innerWidth < 405;
+    const isTransitionWidth = !isMdWidth && !isXsWidth;
+
+    let validOffsetThreshold = 86.87;
+    if (isTransitionWidth) validOffsetThreshold = 158.87;
+    if (isXsWidth) validOffsetThreshold = 176.87;
+    if (isLgWidth) validOffsetThreshold = 131.87;
+
+    const currentOffset = window?.pageYOffset;
+    const isValidOffset = window?.pageYOffset > validOffsetThreshold;
+
+    const isJustScrollingUp =
+      prevScrollDirection !== "up" && prevScrollOffsetRef > currentOffset;
+    const isJustScrollingDown =
+      prevScrollDirection !== "down" && prevScrollOffsetRef < currentOffset;
+
+    if ((isJustScrollingUp || isJustScrollingDown) && isValidOffset) {
+      navbarEl?.classList.toggle("opacity-0");
+      navbarEl?.classList.toggle("pointer-events-none");
+
+      prevScrollDirection = isJustScrollingUp ? "up" : "down";
+    }
+
+    prevScrollOffsetRef = currentOffset;
+  };
+
+  window.addEventListener("scroll", handleToggleOpacity);
+</script>
+
+<style>
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    nav {
+      border-width: 2px;
+    }
+
+    a:focus {
+      outline: 2px solid;
+      outline-offset: 2px;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

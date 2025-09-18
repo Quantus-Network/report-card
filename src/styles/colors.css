@@ -1,0 +1,176 @@
+@theme {
+  /* Background */
+  --color-bg-primary: #0c1014;
+  --color-app-benefit-card: #3d3c444d;
+
+  /* Video Player Colors */
+  --color-video-player: linear-gradient(
+    47deg,
+    #00f 13.42%,
+    #ed4cce 44.7%,
+    #ffe91f 81.08%
+  );
+  --color-video-player-icon: #f4f6f9;
+  --color-video-player-icon-body: #3d3c444d;
+
+  /* Carousel Colors */
+  --color-carousel-dot-border: #ffffff99;
+
+  /* Navbar Colors */
+  --color-navbar-body: #0c1014;
+  --color-navbar-mobile-menu: #0c1014;
+  --color-navbar-link: #ffffff;
+
+  /* Gradient Colors */
+  --color-quantus-pink: #ed4cce;
+  --color-quantus-blue: #0000ff;
+  --color-quantus-dark-blue: #1f1fa3;
+
+  /* Button Colors */
+  --color-button-primary: linear-gradient(
+    12deg,
+    var(--color-quantus-pink) 8.23%,
+    var(--color-quantus-blue) 56.37%,
+    var(--color-quantus-dark-blue) 85.85%
+  );
+  --color-button-outline: #f4f6f9;
+
+  /* Icon Button Colors */
+  --color-button-icon: #d4d3e0;
+  --color-button-icon-body: rgba(61, 60, 68, 0.651);
+
+  /* Border Colors */
+  --color-separator: linear-gradient(
+    90deg,
+    #0c10141a -2.94%,
+    #d4d3e0 49.17%,
+    #0c10141a 102.37%
+  );
+  --color-footer-separator: #ffffff66;
+  --color-teams-separator: #ffffff66;
+  --color-stats-separator: #5b5a60;
+
+  /* Text Colors */
+  --color-text-title-primary: #f4f6f9;
+  --color-text-title-secondary: #ed4cce;
+  --color-text-content-primary: #f4f6f9;
+  --color-text-content-secondary: #d4d3e0;
+  --color-text-giant: linear-gradient(
+    180deg,
+    #83acf0 11.18%,
+    rgba(12, 16, 20, 0.1) 108.37%
+  );
+
+  /* Form Colors */
+  --color-form-body: #ffffff0a;
+  --color-form-body-border: #0a0d170d;
+  --color-form-input-body: #ffffff0d;
+  --color-form-input-body-border: #ffffff33;
+  --color-form-input-text: #ffffff99;
+
+  /* Input Colors */
+  --color-input-body: #f4f6f9;
+  --color-input-error: #dc3545;
+  --color-input-success: #28a745;
+  --color-input-focus: #007bff;
+  --color-input-text: #3d3c44;
+
+  /* Tag Colors */
+  --color-tag: #3d3c44;
+
+  /* Roadmap Colors */
+  --color-marker-line: #f4f6f9;
+}
+
+@utility text-gradient-giant {
+  opacity: 0.5;
+  background: linear-gradient(
+    180deg,
+    #83acf0 11.18%,
+    rgba(12, 16, 20, 0.1) 78.37%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@utility text-gradient-roadmap {
+  background: linear-gradient(
+    180deg,
+    #83acf0 11.18%,
+    rgba(12, 16, 20, 0.1) 78.37%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@utility bg-team {
+  background: radial-gradient(
+    100% 100% at 50% 17%,
+    rgba(131, 172, 240, 0.2) 0.27%,
+    rgba(12, 16, 20, 0.2) 100%
+  );
+  backdrop-filter: blur(20px);
+}
+@utility bg-roadmap-marker {
+  background: #f4f6f9;
+  border-radius: 999px;
+  border: 6px solid #0c1014;
+  filter: drop-shadow(0 0 49px rgba(0, 0, 0, 0.19));
+}
+@utility bg-event-card {
+  background: linear-gradient(
+    150deg,
+    #1f1fa3 16.45%,
+    #00f 41.12%,
+    #ed4cce 65.8%,
+    #ffe91f 83.35%
+  );
+}
+@utility border-top-separator {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) -13.48%,
+    #fff 49.07%,
+    rgba(255, 255, 255, 0) 115.65%
+  );
+}
+@utility bg-app-download {
+  background: linear-gradient(1deg, #0c1014 8.13%, #00f 54.27%, #ed4cce 97.13%);
+}
+@utility bg-app-download-desktop {
+  background: linear-gradient(
+    45deg,
+    #0c1014 13.24%,
+    #00f 51.06%,
+    #ed4cce 86.2%
+  );
+}
+@utility bg-carousel-dot {
+  background: linear-gradient(180deg, #ed4cce 28.03%, #ffe91f 100%);
+}
+@utility text-terms-title {
+  background: linear-gradient(180deg, #ed4cce 28.03%, #ffe91f 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@utility text-privacy-title {
+  background: linear-gradient(46deg, #ed4cce 48.91%, #00f 85.85%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@utility text-contact-title {
+  opacity: 0.9;
+  background: linear-gradient(268deg, #ed4cce 20.3%, #f4f6f9 90.25%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@utility bg-dim {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 19.83%,
+    rgba(0, 0, 0, 0.8) 88.09%
+  );
+}

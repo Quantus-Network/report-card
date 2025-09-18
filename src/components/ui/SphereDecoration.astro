@@ -1,0 +1,190 @@
+---
+import { applyStyles } from "@/utils/apply-styles";
+
+type Variant =
+  | "1"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6"
+  | "7"
+  | "8"
+  | "9"
+  | "10"
+  | "11"
+  | "12"
+  | "13"
+  | "14"
+  | "15"
+  | "16";
+
+interface Props {
+  variant: Variant;
+  size: number;
+  class?: string;
+}
+
+const { variant, size, class: className } = Astro.props;
+---
+
+<div
+  class={applyStyles("rounded-full shrink-0", `sphere-${variant}`, className)}
+  style={`width: ${size}px; height: ${size}px;`}
+>
+</div>
+
+<style>
+  .sphere-1 {
+    background: linear-gradient(
+      128deg,
+      #ed4cce 28.88%,
+      #00f 65.76%,
+      #1f1fa3 92.43%
+    );
+    opacity: 0.3;
+    filter: blur(6px);
+  }
+
+  .sphere-2 {
+    opacity: 0.6;
+    background: linear-gradient(
+      324deg,
+      #ed4cce 15.05%,
+      #00f 52.54%,
+      #1f1fa3 82.09%
+    );
+    filter: blur(15.5px);
+  }
+
+  .sphere-3 {
+    opacity: 0.5;
+    background: linear-gradient(
+      160deg,
+      #ed4cce 14.87%,
+      #00f 63.67%,
+      #0c1014 93.56%
+    );
+    filter: blur(15px);
+  }
+
+  .sphere-4 {
+    background: linear-gradient(
+      46deg,
+      #ed4cce 8.23%,
+      #00f 56.37%,
+      #1f1fa3 85.85%
+    );
+    filter: blur(16.5px);
+  }
+
+  .sphere-5 {
+    background: linear-gradient(
+      161deg,
+      #ed4cce 11.25%,
+      #1f1fa3 33.45%,
+      #0c1014 49.9%
+    );
+    filter: blur(16.5px);
+  }
+
+  .sphere-6 {
+    background: linear-gradient(127deg, #ed4cce 22.5%, #ffe91f 57.4%);
+    filter: blur(16.5px);
+  }
+
+  .sphere-7 {
+    background: linear-gradient(
+      145deg,
+      #ffe91f 27.02%,
+      #ed4cce 45.91%,
+      #00f 67.39%,
+      #1f1fa3 80.85%
+    );
+    filter: blur(15px);
+  }
+
+  .sphere-8 {
+    background: linear-gradient(
+      -41deg,
+      #ed4cce 15%,
+      #00f 55.75%,
+      #1f1fa3 85.32%
+    );
+    opacity: 0.5;
+    filter: blur(15px);
+  }
+
+  .sphere-9 {
+    opacity: 0.5;
+    background: linear-gradient(
+      160deg,
+      #ed4cce 9.92%,
+      #00f 69.61%,
+      #1f1fa3 106.16%
+    );
+    filter: blur(15px);
+  }
+
+  .sphere-10 {
+    background: linear-gradient(315deg, #ed4cce 35.78%, #ffe91f 86.41%);
+    filter: blur(16.5px);
+  }
+
+  .sphere-11 {
+    background: linear-gradient(
+      44deg,
+      #ed4cce 8%,
+      #1f1fa3 56.14%,
+      #0c1014 85.62%
+    );
+    filter: blur(12.5px);
+  }
+
+  .sphere-12 {
+    opacity: 0.8;
+    background: linear-gradient(
+      136deg,
+      #ed4cce 18.01%,
+      #00f 66.15%,
+      #1f1fa3 95.63%
+    );
+    filter: blur(75px);
+  }
+
+  .sphere-13 {
+    background: linear-gradient(236deg, #ed4cce 13.89%, #ffe91f 100.68%);
+    filter: blur(25px);
+  }
+
+  .sphere-14 {
+    background: linear-gradient(
+      270deg,
+      #ed4cce -8.43%,
+      #00f 59.46%,
+      #1f1fa3 101.04%
+    );
+    filter: blur(9px);
+  }
+
+  .sphere-15 {
+    background: linear-gradient(
+      183deg,
+      #ffe91f 13.69%,
+      #ed4cce 41.01%,
+      #00f 72.07%,
+      #1f1fa3 91.54%
+    );
+    filter: blur(15px);
+  }
+
+  .sphere-16 {
+    background: linear-gradient(
+      46deg,
+      #ed4cce 8.23%,
+      #1f1fa3 56.37%,
+      #0c1014 85.85%
+    );
+    filter: blur(12.5px);
+  }
+</style>

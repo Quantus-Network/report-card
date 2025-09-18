@@ -1,0 +1,20 @@
+---
+import { applyStyles } from "@/utils/apply-styles";
+
+interface Props {
+  class?: string;
+  variant?: "1" | "2";
+}
+
+const { class: className, variant = "1" } = Astro.props;
+---
+
+<div
+  class={applyStyles(
+    "h-px w-full",
+    variant === "1" && "bg-(image:--color-separator)",
+    variant === "2" && "border-top-separator",
+    className,
+  )}
+>
+</div>
