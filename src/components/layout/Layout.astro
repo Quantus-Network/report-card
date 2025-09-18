@@ -14,7 +14,6 @@ import Footer from "./footer/Footer.astro";
 import { SEO, type SEOProps } from "astro-seo";
 import defaultMetadata from "@/constants/default-metadata";
 import { getLocaleFromUrl, getTextDirection } from "@/utils/i18n";
-import CookieConsent from "@/components/ui/CookieConsent.astro";
 
 interface Props extends SEOProps {}
 
@@ -49,8 +48,6 @@ const textDirection = getTextDirection(currentLocale);
       <slot />
     </main>
     <Footer />
-
-    <CookieConsent />
   </body>
 </html>
 

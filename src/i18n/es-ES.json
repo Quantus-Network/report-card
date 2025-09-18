@@ -1,0 +1,405 @@
+{
+  "site": {
+    "title": "Quantus Network - Blockchain de Capa 1 Cuántico-Segura",
+    "description": "Una blockchain de Capa 1 de código abierto y cuántico-segura, construida con criptografía post-cuántica y escalabilidad de pruebas zk para proteger sus activos digitales a futuro."
+  },
+  "navbar": {
+    "about": "Nosotros",
+    "foundations": "Fundamentos",
+    "app": "App",
+    "team": "Equipo",
+    "roadmap": "Roadmap",
+    "events": "Eventos",
+    "contact": "Contacto",
+    "cta": "Únete a la BETA Pública"
+  },
+  "hero": {
+    "tagline": "bienvenido al futuro",
+    "title": "Asegura tus Cripto con Tecnología Cuántica",
+    "subtitle": "Quantus Network, la Blockchain L1 para la Era Cuántica",
+    "cta_primary": "Únete a la BETA Pública",
+    "cta_secondary": "Lee el Whitepaper",
+    "stats": {
+      "blocktime": "Tiempo de bloque",
+      "seconds": "seg",
+      "transactions": "Transacciones",
+      "addresses": "Direcciones",
+      "nodes": "Nodos"
+    }
+  },
+  "video": {
+    "title": "Construye valor sobre criptografía que perdura.",
+    "description": "Quantus es para aquellos que ven lo que se avecina: la próxima ola de innovación. Una blockchain preparada para el futuro y cuántico-segura que puede proteger el valor de hoy contra las amenazas del mañana."
+  },
+  "benefits": {
+    "title": "El Futuro es Cuántico",
+    "description": "Quantus Network es una blockchain de Capa 1 diseñada para prosperar en la era cuántica. Asegurada con criptografía post-cuántica y escalada con pruebas de conocimiento cero, ofrece un nivel de seguridad, escalabilidad y usabilidad que las cadenas actuales no pueden igualar. Un diseño desde cero que anticipa la próxima ola de tecnología cuántica.",
+    "cards": {
+      "quantum_secure": {
+        "title": "Seguridad Cuántica en Cada Capa",
+        "description": "Asegurada con criptografía post-cuántica respaldada por el NIST, cada capa de Quantus, desde las firmas de transacción hasta la comunicación P2P, está diseñada para resistir ataques que romperían las blockchains actuales. Construida para perdurar y lista para evolucionar con la era cuántica."
+      },
+      "zero_knowledge": {
+        "title": "Conocimiento Cero por Diseño",
+        "description": "Las pruebas de conocimiento cero recursivas mantienen la red rápida. En lugar de reprocesarlo todo, los nodos verifican pruebas compactas, reduciendo la sobrecarga y asegurando que el sistema crezca sin problemas bajo una demanda real."
+      },
+      "security_control": {
+        "title": "Seguridad que Tú Controlas",
+        "description": "Quantus te da el control. Tú decides cómo se mueven los activos, cómo se protegen y en quién confiar. La complejidad se maneja en segundo plano, para que tu experiencia sea clara, segura y construida para durar en el futuro cuántico."
+      }
+    }
+  },
+  "app": {
+    "tagline": "Tu puerta de enlace cuántico-segura está lista",
+    "title": "App Quantus",
+    "description": "La App Quantus pone la seguridad cuántica y la privacidad de conocimiento cero directamente en tus manos. Cada salvaguarda se ejecuta silenciosamente en segundo plano, para que puedas concentrarte en lo que importa: mover valor con claridad, confianza y control.",
+    "benefits": {
+      "reversible_transactions": {
+        "title": "Transacciones Reversibles",
+        "description": "Establece un período de reversión para cada envío. ¿Cometiste un error? ¿No recibiste los bienes prometidos? ¿Te equivocaste al teclear? Simplemente revierte la transacción antes de que se acabe el tiempo."
+      },
+      "readable_checkphrases": {
+        "title": "Frases de Verificación Legibles",
+        "description": "Se acabó la paranoia de copiar y pegar. Envía con confianza usando frases de verificación únicas y amigables que realmente reconocerás. Sin errores tipográficos ni estafas de imitación, solo destinos claros e inconfundibles."
+      },
+      "security_guardians": {
+        "title": "Guardianes de Seguridad",
+        "description": "Tú eliges a tus aliados de confianza y les das el poder de intervenir e interceptar una transferencia antes de que se complete. Una red de seguridad diseñada por ti, que protege tus activos cuando tú no puedes."
+      },
+      "beneficiary_recovery": {
+        "title": "Beneficiario y Recuperación",
+        "description": "Planifica a largo plazo. Asigna una cuenta de recuperación o un beneficiario para heredar tus fondos si ya no estás. Tus activos permanecen protegidos, incluso durante eventos inesperados. Piénsalo como tu testamento, ejecutado por código."
+      }
+    },
+    "cta": {
+      "tagline": "La beta pública ya está disponible",
+      "title": "Dicen que la computación cuántica está a años de distancia. Lo mismo decían de la IA.",
+      "button": "Únete a la Ola Cuántica"
+    }
+  },
+  "team": {
+    "title": "El Equipo Principal",
+    "description": "Fundado por ingenieros veteranos de startups de criptomonedas en etapas tempranas y antiguos directores de tecnología (CTO). El equipo combina una profunda experiencia en criptografía aplicada y sistemas de conocimiento cero con una capacidad probada para entregar infraestructura segura y escalable.",
+    "cta": "Contáctanos",
+    "members": {
+      "chris": {
+        "title": "Director Ejecutivo (CEO)",
+        "bio": "Pionero tecnológico y emprendedor a la vanguardia de la IA, blockchain y la computación cuántica, Chris aporta una rara mezcla de profunda experiencia técnica y pensamiento filosófico. Ha pasado la última década construyendo herramientas que empoderan a los individuos y redefinen la confianza digital.",
+        "achievements": [
+          "Fundador de BitMesh, Lunyr (LUN) y FactoryDAO (FVT)",
+          "Contribuidor temprano a las bibliotecas fundamentales de Bitcoin",
+          "Ex líder del equipo de IA en Tensor Spark, especializado en aprendizaje automático aplicado",
+          "Asesor privado de ciberseguridad y recuperación de activos digitales para individuos de alto patrimonio (HNW)",
+          "Enfoque: Criptografía, Teoría de la Complejidad, Topología Algebraica, Computación Cuántica"
+        ]
+      },
+      "joe": {
+        "title": "Director de Operaciones (COO)"
+      },
+      "nik": {
+        "title": "Ingeniero de Software Senior"
+      },
+      "cezary": {
+        "title": "Ingeniero de Software Senior"
+      },
+      "rob": {
+        "title": "DevOps"
+      }
+    }
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "timeline": {
+      "heisenberg": {
+        "date": "DIC 2024",
+        "title": "Heisenberg Inception",
+        "content": "Financiación asegurada, Substrate elegido"
+      },
+      "resonance": {
+        "date": "JUL 2025",
+        "title": "Resonance Alpha",
+        "content": "Testnet pública, firmas dilithium, transacciones reversibles"
+      },
+      "schrodinger": {
+        "date": "OCT 2025",
+        "title": "Schrödinger Beta",
+        "content": "Lanzamiento de la Beta Pública, funcionalidades completas, listo para auditoría"
+      },
+      "bell": {
+        "date": "T1 2026",
+        "title": "Bell Mainnet",
+        "content": "Lanzamiento de Mainnet, lanzamiento del token QUAN"
+      },
+      "planck": {
+        "date": "T2 2026",
+        "title": "Planck Upgrades",
+        "content": "Cuentas de Alta Seguridad, Cuentas Multifirma, Integración con Billeteras de Hardware"
+      },
+      "dirac": {
+        "date": "T3 2026",
+        "title": "Dirac Expansion",
+        "content": "Direcciones Entrelazadas, Puente a Solana"
+      }
+    }
+  },
+  "events": {
+    "title": "Ven a Conocernos",
+    "upcoming": "PRÓXIMO EVENTO:",
+    "token2049": {
+      "title": "Token 2049",
+      "date": "1-2 DE OCTUBRE 2025 MARINA BAY SANDS - Singapur",
+      "description": "¡Ven a conocernos y hablemos de computación cuántica, blockchain, arte, música o cualquier otra cosa!",
+      "additional": "¡Estaremos allí todo el fin de semana!",
+      "cta": "Detalles del Evento"
+    }
+  },
+  "socials": {
+    "title": "¡Síguenos para contenido divertido, podcasts, entrevistas, magia y más!"
+  },
+  "footer": {
+    "newsletter": {
+      "title": "Suscríbete a nuestro Boletín",
+      "description": "¡Alerta Alfa! Recibe tu resumen semanal de noticias con adelantos, actualizaciones, resúmenes, contenido educativo y más.",
+      "placeholder": "Introduce tu email",
+      "button": "Suscribirse",
+      "success": "Bienvenido a la seguridad cuántica 🎉",
+      "error": "Error: algo salió mal."
+    },
+    "description": "Una blockchain de Capa 1 cuántico-segura para personas que quieren proteger lo que importa: sus activos, su futuro y su libertad.",
+    "copyright": "Copyright © {year} Quantus Network",
+    "navigation": {
+      "resources": {
+        "title": "Recursos",
+        "community": "Comunidad",
+        "documentation": "Documentación",
+        "tech_support": "Soporte Técnico"
+      },
+      "info": {
+        "title": "Información",
+        "company": "Compañía",
+        "terms": "Términos y Condiciones",
+        "privacy": "Política de Privacidad"
+      }
+    }
+  },
+  "contact": {
+    "title": "Ponte en contacto",
+    "subtitle": "¡Contáctanos y creemos juntos un universo de posibilidades!",
+    "form": {
+      "name": "Nombre",
+      "email": "Email",
+      "message": "Mensaje",
+      "submit": "Enviar",
+      "success": "Procesaremos tu mensaje lo antes posible.",
+      "error": "Error: algo salió mal."
+    },
+    "quote": {
+      "text": "Los átomos o las partículas elementales en sí mismas no son reales; forman un mundo de potencialidades o posibilidades en lugar de uno de cosas o hechos.",
+      "author": "Werner Heisenberg"
+    }
+  },
+  "about": {
+    "title": "Detalles de la Compañía",
+    "content": {
+      "p1": "Quantus Labs LLC es una empresa de tecnología con sede en Wyoming, EE. UU., enfocada en construir infraestructura para tecnologías descentralizadas y resistentes a la censura. Nuestro proyecto insignia, Quantus Network, es una blockchain de Capa 1 diseñada para ser simple, de código abierto y propiedad de la comunidad desde el primer día.",
+      "p2": "Creemos en el poder de los protocolos abiertos, la prueba de trabajo y la propiedad soberana. La aplicación Quantus Network, disponible en escritorio y móvil, permite a los usuarios almacenar activos digitales, minar nuevos bloques y participar en un futuro financiero más justo sin intermediarios.",
+      "p3": "Estamos comprometidos con la transparencia, la privacidad y el empoderamiento de los individuos a través de herramientas seguras y de autocustodia.",
+      "address_label": "Dirección de la Compañía:"
+    },
+    "address": {
+      "company": "Quantus Labs LLC",
+      "street": "30 N Gould St #52155",
+      "city": "Sheridan, WY 82801",
+      "country": "USA"
+    }
+  },
+  "tos": {
+    "title": "Políticas de Quantus Network",
+    "last_updated": "Última actualización: 12 de junio de 2025",
+    "intro": "Esta política explica cómo Quantus Labs LLC (\"Quantus\", \"nosotros\" o \"nuestro\") recopila, utiliza y protege su información cuando utiliza quantus.com, nuestras aplicaciones móviles, aplicaciones de escritorio o interactúa con nosotros de otra manera. Podemos actualizar esta política de vez en cuando. Si realizamos cambios, se lo notificaremos revisando la fecha en la parte superior de esta política y, cuando corresponda, proporcionaremos un aviso adicional en nuestro sitio web.",
+    "service_title": "Términos de Servicio",
+    "privacy_title": "Política de Privacidad",
+    "terms": {
+      "what_we_provide": {
+        "title": "Lo que Ofrecemos",
+        "intro": "Quantus Network ofrece:",
+        "items": [
+          "Aplicaciones móviles (disponibles en la App Store y Google Play)",
+          "Aplicaciones de escritorio con funcionalidad de minería integrada",
+          "Acceso a nuestro código de fuente abierta",
+          "Boletín informativo y actualizaciones de la comunidad",
+          "Acceso a la blockchain de Quantus Network"
+        ]
+      },
+      "what_you_cannot_do": {
+        "title": "Lo que No Puedes Hacer",
+        "intro": "No puede utilizar nuestros servicios para:",
+        "items": [
+          "Participar en actividades ilegales",
+          "Distribuir malware o hackear sistemas",
+          "Violar controles de exportación o sanciones",
+          "Interferir con las operaciones de la red",
+          "Proporcionar información falsa"
+        ]
+      },
+      "mining_participation": {
+        "title": "Minería y Participación en la Red",
+        "items": [
+          "La funcionalidad de minería es para fines educativos y de participación en la red",
+          "Debe cumplir con las regulaciones locales de energía y minería",
+          "No ofrecemos garantías sobre la rentabilidad o las recompensas de la minería",
+          "Las características de la red pueden cambiar a medida que evoluciona el protocolo"
+        ]
+      },
+      "dispute_resolution": {
+        "title": "Resolución de Disputas",
+        "content": "Cualquier disputa se resolverá mediante arbitraje vinculante en Wyoming bajo las reglas de la Asociación Americana de Arbitraje. Estos términos se rigen por la ley de Wyoming. Podemos cancelar el acceso si viola estos términos."
+      },
+      "your_responsibilities": {
+        "title": "Tus Responsabilidades",
+        "intro": "Usted es el único responsable de:",
+        "items": [
+          "Salvaguardar las credenciales de su billetera y su frase semilla",
+          "Cumplir con las leyes locales sobre criptomonedas y minería",
+          "Comprender los riesgos de la tecnología blockchain",
+          "Las claves privadas perdidas no pueden ser recuperadas por nosotros"
+        ]
+      },
+      "non_custodial": {
+        "title": "Diseño sin Custodia",
+        "intro": "Importante: No almacenamos ni accedemos a sus claves privadas, frases semilla o activos digitales. Usted tiene el control y la responsabilidad total de su billetera y sus activos.",
+        "items": [
+          "No podemos recuperar claves privadas o frases semilla perdidas",
+          "No podemos revertir transacciones en la blockchain",
+          "No podemos congelar o controlar sus activos",
+          "Usted es responsable de asegurar las credenciales de su billetera",
+          "Siempre haga una copia de seguridad de su frase semilla en un lugar seguro"
+        ]
+      },
+      "disclaimers": {
+        "title": "Exenciones y Limitaciones de Responsabilidad",
+        "intro": "Nuestros servicios se proporcionan \"tal cual\" sin garantías. Las criptomonedas implican un riesgo sustancial de pérdida. En la máxima medida permitida por la ley:",
+        "items": [
+          "No somos responsables de ningún daño indirecto o consecuente",
+          "Nuestra responsabilidad total no excederá $1",
+          "Usted acepta indemnizarnos por reclamaciones derivadas de su uso de nuestros servicios"
+        ]
+      }
+    },
+    "privacy": {
+      "information_collect": {
+        "title": "Información que Recopilamos",
+        "from_apps": "De Nuestras Aplicaciones:",
+        "from_apps_content": "No recopilamos información personal a través de las aplicaciones de Quantus Network.",
+        "from_website": "De Nuestro Sitio Web recopilamos automáticamente:",
+        "from_website_items": [
+          "Dirección IP (anonimizada a través de Google Analytics)",
+          "Información del navegador y del dispositivo",
+          "Páginas visitadas y patrones de uso",
+          "Ubicación geográfica (solo país/región)"
+        ],
+        "from_you": "De Usted Directamente:",
+        "from_you_items": [
+          "Dirección de correo electrónico (si se suscribe a nuestro boletín)",
+          "Información que proporciona al contactarnos"
+        ],
+        "technical": "Datos Técnicos:",
+        "technical_items": [
+          "Informes de fallos de la aplicación y registros de errores",
+          "Información de conectividad de la red (para mejorar el rendimiento)"
+        ]
+      },
+      "how_we_use": {
+        "title": "Cómo Usamos la Información",
+        "intro": "Utilizamos la información recopilada para:",
+        "items": [
+          "Mejorar nuestro sitio web y nuestras aplicaciones",
+          "Enviar actualizaciones del boletín (con su consentimiento)",
+          "Analizar el uso para mejorar la experiencia del usuario",
+          "Monitorear abusos y proteger nuestros servicios",
+          "Cumplir con las obligaciones legales"
+        ],
+        "we_do_not": "Nosotros no:",
+        "we_do_not_items": [
+          "Vendemos o alquilamos sus datos a terceros",
+          "Almacenamos sus claves privadas o datos de transacciones",
+          "Usamos sus datos para publicidad dirigida"
+        ]
+      },
+      "information_sharing": {
+        "title": "Intercambio de Información",
+        "intro": "Podemos compartir información con:",
+        "items": [
+          "Proveedores de análisis (Google Analytics para datos del sitio web)",
+          "Proveedores de servicios que ayudan a operar nuestro sitio web",
+          "Autoridades legales cuando lo exija la ley"
+        ],
+        "note": "Solo compartimos datos agregados y anonimizados que no pueden identificarlo."
+      },
+      "cookies_tracking": {
+        "title": "Cookies y Seguimiento",
+        "intro": "Nuestro sitio web utiliza cookies para:",
+        "items": [
+          "Funcionalidad esencial del sitio web",
+          "Análisis para comprender el uso del sitio",
+          "Mejoras de rendimiento"
+        ],
+        "note": "Puede controlar las cookies a través de la configuración de su navegador, aunque esto puede afectar la funcionalidad del sitio web."
+      },
+      "data_security": {
+        "title": "Seguridad y Retención de Datos",
+        "intro": "Implementamos medidas de seguridad estándar para proteger sus datos, incluyendo cifrado y almacenamiento seguro. Sin embargo, ningún servicio en línea es completamente seguro.",
+        "technical_data": "Datos Técnicos:",
+        "retention_items": [
+          "Análisis del sitio web: 26 meses",
+          "Suscripciones al boletín: hasta que cancele la suscripción"
+        ]
+      },
+      "your_rights": {
+        "title": "Tus Derechos",
+        "general": "Puede: Cancelar la suscripción a las comunicaciones en cualquier momento",
+        "california": "Para residentes de California: Tiene derechos adicionales bajo la CCPA, incluido el derecho a saber qué información personal recopilamos y el derecho a la eliminación.",
+        "eu_uk": "Para residentes de la UE/Reino Unido: Tiene derechos bajo el RGPD, incluida la portabilidad de datos y el derecho a oponerse al procesamiento."
+      },
+      "international_transfers": {
+        "title": "Transferencias Internacionales",
+        "content": "Su información puede ser procesada en los Estados Unidos. Aseguramos las protecciones adecuadas para las transferencias internacionales de datos."
+      },
+      "childrens_privacy": {
+        "title": "Privacidad de los Niños",
+        "content": "Nuestros servicios no están destinados a menores de 18 años. No recopilamos conscientemente información de menores."
+      },
+      "additional_info": {
+        "title": "Información Adicional",
+        "regulatory": "Cumplimiento Normativo",
+        "regulatory_items": [
+          "Los usuarios deben cumplir con las regulaciones locales sobre criptomonedas",
+          "Algunas funciones pueden estar restringidas en ciertas jurisdicciones",
+          "Nos reservamos el derecho de limitar el acceso según los requisitos legales"
+        ]
+      },
+      "contact_info": {
+        "title": "Contáctanos",
+        "address": "Quantus Labs LLC\n30 N Gould St #52155\nSheridan, WY 82801",
+        "note": "Para preguntas sobre esta política o para ejercer sus derechos de privacidad, por favor use nuestro",
+        "link": "formulario de contacto"
+      }
+    }
+  },
+  "cookie": {
+    "title":"Consentimiento de cookies",
+    "notice":"Este sitio web utiliza cookies para comprender mejor los intereses de sus lectores y atenderlos. Obtenga más información en la",
+    "link": "política de privacidad y los términos de servicio",
+    "accept":"Aceptar",
+    "decline":"Rechazar"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "email_required": "El email es obligatorio.",
+    "name_required": "El nombre es obligatorio.",
+    "message_required": "El mensaje es obligatorio.",
+    "subscribe_failed": "Error al añadir a la lista de espera."
+  }
+}

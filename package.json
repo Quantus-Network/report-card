@@ -9,13 +9,15 @@
     "astro": "astro",
     "deploy": "astro build && wrangler deploy",
     "cf-typegen": "wrangler types",
-	"format:check": "prettier --check .",
+    "format:check": "prettier --check .",
     "format:write": "prettier --write ."
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.8",
-	"@lucide/astro": "^0.541.0",
-	"@tailwindcss/vite": "^4.1.12",
+    "@fontsource/inter": "^5.2.6",
+    "@fontsource/prompt": "^5.2.6",
+    "@lucide/astro": "^0.541.0",
+    "@tailwindcss/vite": "^4.1.12",
     "astro": "^5.13.8",
     "astro-seo": "^0.8.4",
     "clsx": "^2.1.1",

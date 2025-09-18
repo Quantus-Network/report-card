@@ -1,0 +1,405 @@
+{
+  "site": {
+    "title": "Quantus Network - Quantum-Secure Layer 1 Blockchain",
+    "description": "A quantum-secure, open-source Layer 1 blockchain built with post-quantum cryptography and zk-proof scalability to future-proof your digital assets."
+  },
+  "navbar": {
+    "about": "About",
+    "foundations": "Foundations",
+    "app": "App",
+    "team": "Team",
+    "roadmap": "Roadmap",
+    "events": "Events",
+    "contact": "Contact",
+    "cta": "Join the Public BETA"
+  },
+  "hero": {
+    "tagline": "welcome to the future",
+    "title": "Quantum Secure Your Crypto",
+    "subtitle": "Quantus Network, the L1 Blockchain for the Quantum Era",
+    "cta_primary": "Join the Public BETA",
+    "cta_secondary": "Read the Whitepaper",
+    "stats": {
+      "blocktime": "Blocktime",
+      "seconds": "sec",
+      "transactions": "Transactions",
+      "addresses": "Addresses",
+      "nodes": "Nodes"
+    }
+  },
+  "video": {
+    "title": "Build value on cryptography that lasts.",
+    "description": "Quantus is here for people who see what's coming; the next wave of innovation. A future-proof, quantum-secure blockchain that can secure today's value against tomorrow's threats."
+  },
+  "benefits": {
+    "title": "The Future is Quantum",
+    "description": "Quantus Network is a Layer 1 blockchain designed to thrive in the quantum era. Secured with post-quantum cryptography and scaled with zero-knowledge proofs, it delivers a level of security, scalability and usability that today's chains can't match. A clean-slate design that anticipates the coming wave of quantum technology.",
+    "cards": {
+      "quantum_secure": {
+        "title": "Quantum Secure at Every Layer",
+        "description": "Secured with NIST-backed post-quantum cryptography, every layer of Quantus from transaction signatures to P2P communication is engineered to resist attacks that would break today's blockchains. Built to endure, and ready to evolve with the quantum era."
+      },
+      "zero_knowledge": {
+        "title": "Zero-Knowledge by Design",
+        "description": "Recursive zero-knowledge proofs keep the network fast. Instead of reprocessing everything, nodes verify compact proofs - reducing overhead and ensuring the system grows smoothly under real demand."
+      },
+      "security_control": {
+        "title": "Security You Control",
+        "description": "Quantus puts you in charge. You decide how assets move, how they're protected, and who to trust. Complexity is handled in the background, so your experience feels clear, secure, and built to last into the quantum future."
+      }
+    }
+  },
+  "app": {
+    "tagline": "Your quantum-secure gateway is ready",
+    "title": "Quantus App",
+    "description": "The Quantus App puts quantum security and zero-knowledge privacy directly in your hands. Every safeguard runs silently in the background, so you can focus on what matters: moving value with clarity, confidence, and control.",
+    "benefits": {
+      "reversible_transactions": {
+        "title": "Reversible Transactions",
+        "description": "Set a reversible window for every send. Made a mistake? Didn't receive the goods you were promised? Fat fingers struck again? Simply reverse the transaction before the timer's up."
+      },
+      "readable_checkphrases": {
+        "title": "Readable Checkphrases",
+        "description": "No more copy-paste paranoia. Send with confidence using unique, human-friendly checkphrases you'll actually recognize. No typos, no lookalike scams, just clear, unmistakable destinations."
+      },
+      "security_guardians": {
+        "title": "Security Guardians",
+        "description": "You choose your trusted allies and give them the power to step in and intercept a transfer before it goes through. A safety net of your own design, protecting your assets when you can't."
+      },
+      "beneficiary_recovery": {
+        "title": "Beneficiary & Recovery",
+        "description": "Plan for the long term. Assign a recovery account or beneficiary to inherit your funds if you're gone. Your assets stay protected, even during unexpected events. Think of it as your will, enforced by code."
+      }
+    },
+    "cta": {
+      "tagline": "Public beta now live",
+      "title": "They say quantum is years away. They said the same about AI.",
+      "button": "Join the Quantum Wave"
+    }
+  },
+  "team": {
+    "title": "The Core Team",
+    "description": "Founded by veteran engineers from early-stage crypto startups and former CTO roles. The team combines deep expertise in applied cryptography and zero-knowledge systems with a proven ability to ship secure, scalable infrastructure.",
+    "cta": "Get in Touch",
+    "members": {
+      "chris": {
+        "title": "Chief Executive Officer",
+        "bio": "A technology pioneer and entrepreneur at the forefront of AI, blockchain, and quantum computing, Chris brings a rare mix of deep technical expertise and philosophical thinking. He's spent the last decade building tools that empower individuals and redefine digital trust.",
+        "achievements": [
+          "Founder of BitMesh, Lunyr (LUN), and FactoryDAO (FVT)",
+          "Early contributor to foundational Bitcoin libraries",
+          "Former AI team lead at Tensor Spark, specializing in applied machine learning",
+          "Private cybersecurity and digital asset recovery advisor for HNW individuals",
+          "Focus: Cryptography, Complexity Theory, Algebraic Topology, Quantum Computing"
+        ]
+      },
+      "joe": {
+        "title": "Chief Operating Officer"
+      },
+      "nik": {
+        "title": "Senior Software Engineer"
+      },
+      "cezary": {
+        "title": "Senior Software Engineer"
+      },
+      "rob": {
+        "title": "Dev Ops"
+      }
+    }
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "timeline": {
+      "heisenberg": {
+        "date": "DEC 2024",
+        "title": "Heisenberg Inception",
+        "content": "Funding secured, Substrate chosen"
+      },
+      "resonance": {
+        "date": "JULY 2025",
+        "title": "Resonance Alpha",
+        "content": "Public testnet, dilithium signatures, reversible transactions"
+      },
+      "schrodinger": {
+        "date": "OCT 2025",
+        "title": "Schrödinger Beta",
+        "content": "Public Beta Launch, features complete, ready for audit"
+      },
+      "bell": {
+        "date": "Q1 2026",
+        "title": "Bell Mainnet",
+        "content": "Mainnet launch, QUAN token launch"
+      },
+      "planck": {
+        "date": "Q2 2026",
+        "title": "Planck Upgrades",
+        "content": "High Security Accounts, Multisignature Accounts, Hardware Wallet Integration"
+      },
+      "dirac": {
+        "date": "Q3 2026",
+        "title": "Dirac Expansion",
+        "content": "Entangled Addresses, Bridge to Solana"
+      }
+    }
+  },
+  "events": {
+    "title": "Come Meet Us",
+    "upcoming": "UPCOMING EVENT:",
+    "token2049": {
+      "title": "Token 2049",
+      "date": "1-2 OCTOBER 2025 MARINA BAY SANDS - Singapore",
+      "description": "Come meet us and have a chat about quantum, blockchain, art, music or anything!",
+      "additional": "We'll be there all weekend!",
+      "cta": "Event Details"
+    }
+  },
+  "socials": {
+    "title": "Follow us for fun content, podcasts, interviews, wizardry and more!"
+  },
+  "footer": {
+    "newsletter": {
+      "title": "Subscribe to our Newsletter",
+      "description": "Alpha Alert! Get your weekly news-blast with sneak previews, updates, news roundup, educational content and more",
+      "placeholder": "Enter your email",
+      "button": "Subscribe",
+      "success": "Welcome to quantum security 🎉",
+      "error": "Error: something is going wrong."
+    },
+    "description": "A quantum-secure, Layer 1 blockchain for people who want to protect what matters; their assets, their future, and their freedom.",
+    "copyright": "Copyright © {year} Quantus Network",
+    "navigation": {
+      "resources": {
+        "title": "Resources",
+        "community": "Community",
+        "documentation": "Documentation",
+        "tech_support": "Tech Support"
+      },
+      "info": {
+        "title": "Info",
+        "company": "Company",
+        "terms": "Terms & Conditions",
+        "privacy": "Privacy Policy"
+      }
+    }
+  },
+  "contact": {
+    "title": "Get in touch",
+    "subtitle": "Reach out, and let's create a universe of possibilities together!",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send",
+      "success": "We will process your message as soon as possible.",
+      "error": "Error: something is going wrong."
+    },
+    "quote": {
+      "text": "The atoms or elementary particles themselves are not real; they form a world of potentialities or possibilities rather than one of things or facts.",
+      "author": "Werner Heisenberg"
+    }
+  },
+  "about": {
+    "title": "Company Details",
+    "content": {
+      "p1": "Quantus Labs LLC is a technology company based in Wyoming, USA, focused on building infrastructure for decentralized, censorship-resistant technologies. Our flagship project, Quantus Network is a Layer 1 blockchain designed to be simple, open-source, and community-owned from day one.",
+      "p2": "We believe in the power of open protocols, proof-of-work, and sovereign ownership. The Quantus Network app—available on desktop and mobile—lets users store digital assets, mine new blocks, and participate in a fairer financial future without intermediaries.",
+      "p3": "We're committed to transparency, privacy, and empowering individuals through secure, self-custodial tools.",
+      "address_label": "Company Address:"
+    },
+    "address": {
+      "company": "Quantus Labs LLC",
+      "street": "30 N Gould St #52155",
+      "city": "Sheridan, WY 82801",
+      "country": "USA"
+    }
+  },
+  "tos": {
+    "title": "Quantus Network Policies",
+    "last_updated": "Last updated: June 12, 2025",
+    "intro": "This policy explains how Quantus Labs LLC (\"Quantus,\" \"we,\" or \"us\") collects, uses, and protects your information when you use quantus.com, our mobile apps, desktop applications, or otherwise interact with us. We may update this policy from time to time. If we make changes, we will notify you by revising the date at the top of this policy and, when appropriate, provide additional notice on our website.",
+    "service_title": "Terms of Service",
+    "privacy_title": "Privacy Policy",
+    "terms": {
+      "what_we_provide": {
+        "title": "What We Provide",
+        "intro": "Quantus Network offers:",
+        "items": [
+          "Mobile apps (available on App Store and Google Play)",
+          "Desktop applications with integrated mining functionality",
+          "Access to our open-source code",
+          "Community newsletter and updates",
+          "Access to the Quantus Network blockchain"
+        ]
+      },
+      "what_you_cannot_do": {
+        "title": "What You Cannot Do",
+        "intro": "You may not use our services to:",
+        "items": [
+          "Engage in illegal activities",
+          "Distribute malware or hack systems",
+          "Violate export controls or sanctions",
+          "Interfere with network operations",
+          "Provide false information"
+        ]
+      },
+      "mining_participation": {
+        "title": "Mining and Network Participation",
+        "items": [
+          "Mining functionality is for educational and network participation",
+          "You must comply with local energy and mining regulations",
+          "We make no guarantees about mining profitability or rewards",
+          "Network features may change as the protocol evolves"
+        ]
+      },
+      "dispute_resolution": {
+        "title": "Dispute Resolution",
+        "content": "Any disputes will be resolved through binding arbitration in Wyoming under American Arbitration Association rules. These terms are governed by Wyoming law. We may terminate access if you violate these terms"
+      },
+      "your_responsibilities": {
+        "title": "Your Responsibilities",
+        "intro": "You are solely responsible for:",
+        "items": [
+          "Safeguarding your wallet credentials and seed phrase",
+          "Complying with local laws regarding cryptocurrency and mining",
+          "Understanding the risks of blockchain technology",
+          "Lost private keys cannot be recovered by us"
+        ]
+      },
+      "non_custodial": {
+        "title": "Non-Custodial Design",
+        "intro": "Important: We do not store or access your private keys, seed phrases, or digital assets. You have full control and responsibility for your wallet and assets.",
+        "items": [
+          "We cannot recover lost private keys or seed phrases",
+          "We cannot reverse transactions on the blockchain",
+          "We cannot freeze or control your assets",
+          "You are responsible for securing your wallet credentials",
+          "Always back up your seed phrase in a secure location"
+        ]
+      },
+      "disclaimers": {
+        "title": "Disclaimers and Limitations",
+        "intro": "Our services are provided \"as-is\" without warranties. Cryptocurrency involves substantial risk of loss. To the maximum extent permitted by law:",
+        "items": [
+          "We are not liable for any indirect or consequential damages",
+          "Our total liability shall not exceed $1",
+          "You agree to indemnify us from claims arising from your use of our services"
+        ]
+      }
+    },
+    "privacy": {
+      "information_collect": {
+        "title": "Information We Collect",
+        "from_apps": "From Our Apps:",
+        "from_apps_content": "We do not collect personal information through the Quantus Network applications.",
+        "from_website": "From Our Website we automatically collect:",
+        "from_website_items": [
+          "IP address (anonymized through Google Analytics)",
+          "Browser and device information",
+          "Pages visited and usage patterns",
+          "Geographic location (country/region only)"
+        ],
+        "from_you": "From You Directly:",
+        "from_you_items": [
+          "Email address (if you subscribe to our newsletter)",
+          "Information you provide when contacting us"
+        ],
+        "technical": "Technical Data:",
+        "technical_items": [
+          "Application crash reports and error logs",
+          "Network connectivity information (to improve performance)"
+        ]
+      },
+      "how_we_use": {
+        "title": "How We Use Information",
+        "intro": "We use collected information to:",
+        "items": [
+          "Improve our website and applications",
+          "Send newsletter updates (with your consent)",
+          "Analyze usage to enhance user experience",
+          "Monitor for abuse and protect our services",
+          "Comply with legal obligations"
+        ],
+        "we_do_not": "We do not:",
+        "we_do_not_items": [
+          "Sell or rent your data to third parties",
+          "Store your private keys or transaction data",
+          "Use your data for targeted advertising"
+        ]
+      },
+      "information_sharing": {
+        "title": "Information Sharing",
+        "intro": "We may share information with:",
+        "items": [
+          "Analytics providers (Google Analytics for website data)",
+          "Service providers who help operate our website",
+          "Legal authorities when required by law"
+        ],
+        "note": "We only share aggregated, anonymized data that cannot identify you."
+      },
+      "cookies_tracking": {
+        "title": "Cookies and Tracking",
+        "intro": "Our website uses cookies for:",
+        "items": [
+          "Essential website functionality",
+          "Analytics to understand site usage",
+          "Performance improvements"
+        ],
+        "note": "You can control cookies through your browser settings, though this may affect website functionality."
+      },
+      "data_security": {
+        "title": "Data Security and Retention",
+        "intro": "We implement standard security measures to protect your data, including encryption and secure storage. However, no online service is completely secure.",
+        "technical_data": "Technical Data:",
+        "retention_items": [
+          "Website analytics: 26 months",
+          "Newsletter subscriptions: Until you unsubscribe"
+        ]
+      },
+      "your_rights": {
+        "title": "Your Rights",
+        "general": "You can: Unsubscribe from communications anytime",
+        "california": "For California residents: You have additional rights under CCPA, including the right to know what personal information we collect and the right to deletion.",
+        "eu_uk": "For EU/UK residents: You have rights under GDPR, including data portability and the right to object to processing."
+      },
+      "international_transfers": {
+        "title": "International Transfers",
+        "content": "Your information may be processed in the United States. We ensure appropriate protections for international data transfers."
+      },
+      "childrens_privacy": {
+        "title": "Children's Privacy",
+        "content": "Our services are not intended for anyone under 18. We do not knowingly collect information from minors."
+      },
+      "additional_info": {
+        "title": "Additional Information",
+        "regulatory": "Regulatory Compliance",
+        "regulatory_items": [
+          "Users must comply with local cryptocurrency regulations",
+          "Some features may be restricted in certain jurisdictions",
+          "We reserve the right to limit access based on legal requirements"
+        ]
+      },
+      "contact_info": {
+        "title": "Contact Us",
+        "address": "Quantus Labs LLC\n30 N Gould St #52155\nSheridan, WY 82801",
+        "note": "For questions about this policy or to exercise your privacy rights, please use our",
+        "link": "contact form"
+      }
+    }
+  },
+  "cookie": {
+    "title":"Cookie Consent",
+    "notice":"This website uses cookies to understand the interests of its readers better and cater to them. Find out more in the",
+    "link": "privacy policy and terms of service",
+    "accept":"Accept",
+    "decline":"Decline"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "email_required": "Email is required.",
+    "name_required": "Name is required.",
+    "message_required": "Message is required.",
+    "subscribe_failed": "Failed adding to waitlist."
+  }
+}

@@ -231,7 +231,6 @@ const isCurrentPage = (href: string) =>
       const errMsg = error.message;
       if (errMsg && errorMessage) errorMessage.textContent = errMsg;
 
-      console.log(errorAlert);
       // Show error message
       errorAlert?.classList.remove("hidden");
       setTimeout(() => {
