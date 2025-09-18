@@ -1,24 +1,24 @@
 import type {
   EthereumAddressData,
   EthereumSecurityAnalysis,
-  QuantumSecurityScore
-} from '@/interfaces/EthereumSecurity';
+  QuantumSecurityScore,
+} from "@/interfaces/EthereumSecurity";
 
-const getGrade = (score: number): QuantumSecurityScore['grade'] => {
-  if (score >= 95) return 'A+';
-  if (score >= 85) return 'A';
-  if (score >= 75) return 'B';
-  if (score >= 65) return 'C';
-  if (score >= 50) return 'D';
-  return 'F';
+const getGrade = (score: number): QuantumSecurityScore["grade"] => {
+  if (score >= 95) return "A+";
+  if (score >= 85) return "A";
+  if (score >= 75) return "B";
+  if (score >= 65) return "C";
+  if (score >= 50) return "D";
+  return "F";
 };
 
-const getRiskLevel = (score: number): QuantumSecurityScore['riskLevel'] => {
-  if (score >= 90) return 'Very Low';
-  if (score >= 75) return 'Low';
-  if (score >= 60) return 'Medium';
-  if (score >= 40) return 'High';
-  return 'Very High';
+const getRiskLevel = (score: number): QuantumSecurityScore["riskLevel"] => {
+  if (score >= 90) return "Very Low";
+  if (score >= 75) return "Low";
+  if (score >= 60) return "Medium";
+  if (score >= 40) return "High";
+  return "Very High";
 };
 
 /**
@@ -29,7 +29,7 @@ const getRiskLevel = (score: number): QuantumSecurityScore['riskLevel'] => {
  * - Duration of public key exposure: Longer exposure = higher risk
  */
 export const calculateQuantumSecurityScore = (
-  addressData: EthereumAddressData
+  addressData: EthereumAddressData,
 ): QuantumSecurityScore => {
   let score = 100; // Start with perfect score
   const recommendations: string[] = [];
@@ -40,7 +40,7 @@ export const calculateQuantumSecurityScore = (
 
   if (addressData.hasOutgoingTransactions) {
     recommendations.push(
-      'Your public key has been exposed through outgoing transactions, making it vulnerable to quantum attacks.'
+      "Your public key has been exposed through outgoing transactions, making it vulnerable to quantum attacks.",
     );
 
     // Additional penalty based on exposure duration
@@ -50,31 +50,31 @@ export const calculateQuantumSecurityScore = (
         // 2+ years
         score -= 20;
         recommendations.push(
-          `Public key has been exposed for ${Math.floor(days / 365)} years, significantly increasing quantum risk.`
+          `Public key has been exposed for ${Math.floor(days / 365)} years, significantly increasing quantum risk.`,
         );
       } else if (days > 365) {
         // 1+ years
         score -= 15;
         recommendations.push(
-          `Public key has been exposed for over a year (${Math.floor(days / 365)} years), increasing quantum vulnerability.`
+          `Public key has been exposed for over a year (${Math.floor(days / 365)} years), increasing quantum vulnerability.`,
         );
       } else if (days > 180) {
         // 6+ months
         score -= 10;
         recommendations.push(
-          `Public key has been exposed for ${Math.floor(days / 30)} months, creating moderate quantum risk.`
+          `Public key has been exposed for ${Math.floor(days / 30)} months, creating moderate quantum risk.`,
         );
       } else if (days > 30) {
         // 1+ months
         score -= 5;
         recommendations.push(
-          `Public key has been exposed for ${Math.floor(days / 30)} months.`
+          `Public key has been exposed for ${Math.floor(days / 30)} months.`,
         );
       }
     }
   } else {
     recommendations.push(
-      'Excellent! No outgoing transactions mean your public key remains secure.'
+      "Excellent! No outgoing transactions mean your public key remains secure.",
     );
   }
 
@@ -84,17 +84,17 @@ export const calculateQuantumSecurityScore = (
   if (addressData.balanceEth > 1000) {
     balanceRiskFactor = 25;
     recommendations.push(
-      'Very high balance increases the attractiveness to quantum attackers.'
+      "Very high balance increases the attractiveness to quantum attackers.",
     );
   } else if (addressData.balanceEth > 100) {
     balanceRiskFactor = 20;
     recommendations.push(
-      'High balance makes this address a more valuable target for quantum attacks.'
+      "High balance makes this address a more valuable target for quantum attacks.",
     );
   } else if (addressData.balanceEth > 10) {
     balanceRiskFactor = 15;
     recommendations.push(
-      'Moderate balance poses some risk if quantum computers become available.'
+      "Moderate balance poses some risk if quantum computers become available.",
     );
   } else if (addressData.balanceEth > 1) {
     balanceRiskFactor = 10;
@@ -110,19 +110,19 @@ export const calculateQuantumSecurityScore = (
   // Add positive recommendations for good security
   if (!addressData.hasOutgoingTransactions && addressData.balanceEth > 0) {
     recommendations.push(
-      'Consider using this address only for receiving funds to maintain quantum security.'
+      "Consider using this address only for receiving funds to maintain quantum security.",
     );
   }
 
   if (addressData.balanceEth === 0) {
-    recommendations.push('Empty address has minimal quantum risk exposure.');
+    recommendations.push("Empty address has minimal quantum risk exposure.");
   }
 
   return {
     score: Math.round(score),
     grade: getGrade(score),
     riskLevel: getRiskLevel(score),
-    recommendations
+    recommendations,
   };
 };
 
@@ -130,7 +130,7 @@ export const calculateQuantumSecurityScore = (
  * Generate complete security analysis for an Ethereum address
  */
 export const generateSecurityAnalysis = (
-  addressData: EthereumAddressData
+  addressData: EthereumAddressData,
 ): EthereumSecurityAnalysis => {
   const securityScore = calculateQuantumSecurityScore(addressData);
 
@@ -166,8 +166,8 @@ export const generateSecurityAnalysis = (
       publicKeyExposed,
       balanceRiskFactor,
       exposureDurationRisk,
-      daysSinceExposure: addressData.daysSinceFirstTransaction
-    }
+      daysSinceExposure: addressData.daysSinceFirstTransaction,
+    },
   };
 };
 
@@ -175,7 +175,7 @@ export const generateSecurityAnalysis = (
  * Format ETH balance for display
  */
 export const formatEthBalance = (balance: number): string => {
-  if (balance === 0) return '0 ETH';
+  if (balance === 0) return "0 ETH";
   if (balance < 0.001) return `${balance.toExponential(2)} ETH`;
   if (balance < 1) return `${balance.toFixed(4)} ETH`;
   if (balance < 1000) return `${balance.toFixed(2)} ETH`;
@@ -186,52 +186,37 @@ export const formatEthBalance = (balance: number): string => {
  * Format days since exposure for display
  */
 export const formatExposureDuration = (days: number): string => {
-  if (days < 1) return 'Less than a day';
-  if (days === 1) return '1 day';
+  if (days < 1) return "less than a day";
+  if (days === 1) return "1 day";
   if (days < 30) return `${days} days`;
   if (days < 365) {
     const months = Math.floor(days / 30);
-    return months === 1 ? '1 month' : `${months} months`;
+    return months === 1 ? "1 month" : `${months} months`;
   }
   const years = Math.floor(days / 365);
   const remainingMonths = Math.floor((days % 365) / 30);
   if (years === 1) {
-    return remainingMonths > 0 ? `1 year, ${remainingMonths} months` : '1 year';
+    return remainingMonths > 0 ? `1 year, ${remainingMonths} months` : "1 year";
   }
   return remainingMonths > 0
     ? `${years} years, ${remainingMonths} months`
     : `${years} years`;
 };
 
-/**
- * Get color class based on score
- */
-export const getScoreColor = (score: number): string => {
-  if (score >= 90) return 'text-green-400';
-  if (score >= 75) return 'text-green-300';
-  if (score >= 60) return 'text-yellow-400';
-  if (score >= 40) return 'text-orange-400';
-  return 'text-red-400';
-};
-
-/**
- * Get background color class based on grade
- */
-export const getGradeBackgroundColor = (
-  grade: QuantumSecurityScore['grade']
+// Determines the text color class based on the risk level for emphasis
+export const getRiskColorClass = (
+  riskLevel: QuantumSecurityScore["riskLevel"],
 ): string => {
-  switch (grade) {
-    case 'A+':
-    case 'A':
-      return 'bg-quantum-blue/5 border-quantum-blue/20';
-    case 'B':
-      return 'bg-quantum-yellow/5 border-quantum-yellow/20';
-    case 'C':
-      return 'bg-quantum-yellow/10 border-quantum-yellow/30';
-    case 'D':
-    case 'F':
-      return 'bg-quantum-red/5 border-quantum-red/20';
+  switch (riskLevel) {
+    case "Very Low":
+    case "Low":
+      return "text-[var(--color-quantus-blue)]";
+    case "Medium":
+      return "text-yellow-400"; // A neutral, attention-grabbing color
+    case "High":
+    case "Very High":
+      return "text-[var(--color-input-error)]";
     default:
-      return 'bg-medium-gray/5 border-medium-gray/20';
+      return "text-[var(--color-text-content-primary)]";
   }
 };

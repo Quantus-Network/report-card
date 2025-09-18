@@ -4,7 +4,6 @@ import BrandName from "@/assets/brand/brand-name.svg";
 
 import Button from "@/components/ui/Button.astro";
 import Input from "@/components/ui/Input.astro";
-import LanguageSwitcher from "@/components/ui/LanguageSwitcher.astro";
 import MessageAlert from "@/components/ui/MessageAlert.astro";
 import Separator from "@/components/ui/Separator.astro";
 import SiteSocials from "@/components/ui/SiteSocials.astro";
@@ -154,9 +153,7 @@ const isCurrentPage = (href: string) =>
   <div
     class="max-w-content mx-auto flex w-full flex-col items-center gap-10 pt-[98px] text-center md:pt-[83px] lg:flex-row"
   >
-    <div class="order-1 max-w-[300px] grow">
-      <LanguageSwitcher class="max-w-[200px]" />
-    </div>
+    <div class="order-1 max-w-[300px] grow"></div>
 
     <div class="order-3 grow lg:order-2">
       <p id="footer-copyright" class="font-small text-text-content-secondary">

@@ -42,16 +42,16 @@ const textDirection = getTextDirection(currentLocale);
     <meta name="generator" content={Astro.generator} />
     <SEO {...metadata} titleTemplate={undefined} />
   </head>
-  <body class="flex grow flex-col pt-[139px]" data-locale={currentLocale}>
-    <Navbar locale={currentLocale} />
+  <body class="flex grow flex-col" data-locale={currentLocale}>
+    <!-- <Navbar locale={currentLocale} /> -->
     <main class="grow">
       <slot />
     </main>
-    <Footer />
+    <!-- <Footer /> -->
   </body>
 </html>
 
-<script>
+<!-- <script>
   import {
     DEFAULT_LOCALE,
     getLocaleFromUrl,
@@ -84,4 +84,4 @@ const textDirection = getTextDirection(currentLocale);
 
   localStorage.setItem(localeStorageKey, "true");
   window.location.replace(newPath);
-</script>
+</script> -->

@@ -1,0 +1,219 @@
+---
+import { GET } from "@/pages/api/reports/[address]";
+import Layout from "@/components/layout/Layout.astro";
+import env from "@/config";
+import { createTranslator, getLocaleFromUrl } from "@/utils/i18n";
+import type { SEOProps } from "astro-seo";
+import type { EthereumAddressData } from "@/interfaces/EthereumSecurity";
+import {
+  generateSecurityAnalysis,
+  getRiskColorClass,
+} from "@/utils/quantum-security-scorer";
+import GeneralCard from "@/components/ui/GeneralCard.astro";
+import RiskFactorCard from "@/components/ui/RiskFactorCard.astro";
+import Separator from "@/components/ui/Separator.astro";
+import { formatExposureDuration } from "@/utils/quantum-security-scorer";
+import SphereDecoration from "@/components/ui/SphereDecoration.astro";
+
+const response = await GET(Astro);
+const data = await response.json<EthereumAddressData>();
+
+const securityAnalysis = generateSecurityAnalysis(data);
+const { securityScore, addressData, analysisDetails, address } =
+  securityAnalysis;
+
+// --- SVG GAUGE CALCULATIONS ---
+const radius = 90;
+const circumference = 2 * Math.PI * radius;
+const offset = circumference - (securityScore.score / 100) * circumference;
+
+const locale = getLocaleFromUrl(Astro.url.pathname);
+const t = await createTranslator(locale);
+
+const metadata: SEOProps = {
+  canonical: `${env.SITE_BASE_URL}/quantum-security-checker`,
+};
+---
+
+<Layout {...metadata}>
+  <div class="relative overflow-hidden">
+    <div class="absolute -z-10 flex size-full flex-col items-center">
+      <SphereDecoration
+        class="absolute -top-[0.8rem] -right-[5rem] md:top-[20rem] md:right-[4rem]"
+        variant="1"
+        size={202}
+      />
+      <SphereDecoration
+        class="absolute top-[6.5rem] md:top-[42rem]"
+        variant="2"
+        size={320}
+      />
+      <SphereDecoration
+        class="absolute bottom-[4.5rem] -left-[6rem] md:hidden"
+        variant="3"
+        size={283}
+      />
+      <SphereDecoration
+        class="absolute right-[8rem] bottom-28 hidden md:block"
+        variant="3"
+        size={413}
+      />
+    </div>
+
+    <div class="flex flex-col items-center">
+      <span
+        class="font-giant-mobile lg:font-giant text-gradient-giant min-large-mobile:text-[54px] absolute top-4 -z-10 text-[44px] min-[642px]:top-8 min-[642px]:text-[92px] lg:top-2"
+        >VURNERABILITY</span
+      >
+    </div>
+
+    <div
+      class="max-w-content mx-auto space-y-16 px-4 py-20 md:space-y-24 lg:pt-36 lg:pb-20 2xl:px-0"
+    >
+      <header class="text-center">
+        <h1
+          class="font-medium-title-mobile md:font-medium-title lg:font-large-title text-[var(--color-text-title-primary)]"
+        >
+          Quantum Security Report
+        </h1>
+        <p
+          class="font-body-mobile md:font-body mt-4 break-words text-[var(--color-text-content-secondary)]"
+        >
+          Analysis for wallet: <strong>{address}</strong>
+        </p>
+      </header>
+
+      <section
+        class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16"
+      >
+        <div
+          class="relative mx-auto flex h-64 w-64 items-center justify-center md:h-80 md:w-80"
+        >
+          <svg class="absolute inset-0" viewBox="0 0 200 200">
+            <circle
+              cx="100"
+              cy="100"
+              r={radius}
+              stroke-width="12"
+              class="stroke-current text-[var(--color-app-benefit-card)]"
+              fill="none"></circle>
+            <circle
+              cx="100"
+              cy="100"
+              r={radius}
+              stroke-width="12"
+              fill="none"
+              stroke="url(#scoreGradient)"
+              stroke-linecap="round"
+              transform="rotate(-90 100 100)"
+              style={`stroke-dasharray: ${circumference}; stroke-dashoffset: ${offset};`}
+              class="transition-all duration-1000 ease-out"></circle>
+            <defs>
+              <linearGradient
+                id="scoreGradient"
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="var(--color-quantus-blue)"></stop>
+                <stop offset="100%" stop-color="var(--color-quantus-pink)"
+                ></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="text-center">
+            <span
+              class={`font-medium-title-mobile md:font-large-title ${getRiskColorClass(securityScore.riskLevel)}`}
+            >
+              {securityScore.score}
+            </span>
+            <span
+              class="font-tag-mobile md:font-tag block text-[var(--color-text-content-secondary)]"
+            >
+              Grade: {securityScore.grade}
+            </span>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <GeneralCard title="Risk Level" content={securityScore.riskLevel} />
+          <GeneralCard
+            title="Key Exposure"
+            content={analysisDetails.publicKeyExposed ? "EXPOSED" : "SECURE"}
+            subContent={analysisDetails.daysSinceExposure
+              ? `Public key has been visible for ${analysisDetails.daysSinceExposure} days.`
+              : undefined}
+          />
+          <GeneralCard
+            title="Balance"
+            content={`${addressData.balanceEth.toFixed(4)} ETH`}
+          />
+        </div>
+      </section>
+
+      <Separator />
+
+      <section>
+        <h2
+          class="font-medium-title-mobile md:font-medium-title mb-8 text-center md:mb-12"
+        >
+          Risk Factors
+        </h2>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+          <RiskFactorCard
+            title="Public Key Status"
+            content={analysisDetails.publicKeyExposed
+              ? `Your public key was likely been exposed for ${formatExposureDuration(
+                  analysisDetails.daysSinceExposure ?? 0,
+                )} when you sent your first transaction. This makes your wallet a potential target for future quantum attacks.`
+              : "Your public key has not been exposed through outgoing transactions. This is a very strong security posture against quantum threats. To maintain this, consider using this address for receiving funds only."}
+          />
+          <RiskFactorCard
+            title="Balance & Exposure"
+            content={`A high balance can make your wallet a more attractive target.
+                Combined with a public key that has been exposed for a long time
+                ${
+                  analysisDetails.daysSinceExposure
+                    ? `${analysisDetails.daysSinceExposure} days`
+                    : "N/A"
+                }, the overall risk increases.`}
+          />
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-3xl">
+        <h2
+          class="font-medium-title-mobile md:font-medium-title mb-8 text-center md:mb-12"
+        >
+          Advices
+        </h2>
+        <ul class="space-y-4">
+          {
+            securityScore.recommendations.map((rec) => (
+              <li class="flex items-start">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="mt-1 mr-4 h-6 w-6 flex-shrink-0 text-[var(--color-quantus-pink)]"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span class="font-body md:font-large-body text-[var(--color-text-content-secondary)]">
+                  {rec}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </div>
+</Layout>
