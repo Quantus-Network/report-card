@@ -3,7 +3,7 @@ import type { SEOProps } from "astro-seo";
 
 const title = {
   template: `%s | ${env.SITE_NAME}`,
-  default: "Quantus Network - Quantum-Secure Layer 1 Blockchain",
+  default: "Quantus Network - Report Card",
 };
 const description =
   "A quantum-secure, open-source Layer 1 blockchain built with post-quantum cryptography and zk-proof scalability to future-proof your digital assets.";

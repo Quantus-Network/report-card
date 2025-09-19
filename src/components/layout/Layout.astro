@@ -8,9 +8,6 @@ import "@fontsource/prompt/700.css";
 import "@fontsource/prompt/900.css";
 import "@fontsource/inter/900.css";
 
-import Navbar from "./navbar/Navbar.astro";
-import Footer from "./footer/Footer.astro";
-
 import { SEO, type SEOProps } from "astro-seo";
 import defaultMetadata from "@/constants/default-metadata";
 import { getLocaleFromUrl, getTextDirection } from "@/utils/i18n";
@@ -43,45 +40,8 @@ const textDirection = getTextDirection(currentLocale);
     <SEO {...metadata} titleTemplate={undefined} />
   </head>
   <body class="flex grow flex-col" data-locale={currentLocale}>
-    <!-- <Navbar locale={currentLocale} /> -->
     <main class="grow">
       <slot />
     </main>
-    <!-- <Footer /> -->
   </body>
 </html>
-
-<!-- <script>
-  import {
-    DEFAULT_LOCALE,
-    getLocaleFromUrl,
-    SUPPORTED_LOCALES,
-  } from "@/utils/i18n";
-
-  const localeStorageKey = "astro-i18n-redirect";
-  const hasRedirected = localStorage.getItem(localeStorageKey);
-
-  if (hasRedirected) throw new Error("Already redirected");
-
-  const currentLocale = getLocaleFromUrl(window.location.pathname);
-  const userLang = navigator.language as any;
-
-  if (currentLocale === userLang || userLang.includes("en-")) {
-    localStorage.setItem(localeStorageKey, "true");
-    throw new Error("Already on the correct locale");
-  }
-
-  const cleanPathname = window.location.pathname
-    .split("/")
-    .filter((path: any) => !SUPPORTED_LOCALES.includes(path) && path !== "")
-    .join("/");
-
-  let newPath = `/${cleanPathname}`;
-
-  if (SUPPORTED_LOCALES.includes(userLang) && userLang !== DEFAULT_LOCALE) {
-    newPath = `/${userLang}${cleanPathname}`;
-  }
-
-  localStorage.setItem(localeStorageKey, "true");
-  window.location.replace(newPath);
-</script> -->
