@@ -5,19 +5,12 @@ export const GET: APIRoute = async ({ params }) => {
   const { address } = params;
 
   if (!address) {
-    return new Response(
-      JSON.stringify({ error: "Address parameter is missing." }),
-      { status: 400 }
-    );
+    throw new Error("Address parameter is missing.");
   }
 
   const ethAddressRegex = /^0x[a-fA-F0-9]{40}$/;
-  if (!ethAddressRegex.test(address)) {
-    return new Response(
-      JSON.stringify({ error: "Invalid Ethereum address format" }),
-      { status: 400 }
-    );
-  }
+  if (!ethAddressRegex.test(address))
+    throw new Error("Invalid Ethereum address format");
 
   try {
     // Fetch balance and check if has transactions
@@ -42,7 +35,7 @@ export const GET: APIRoute = async ({ params }) => {
       const secondsSinceFirst = now - firstTransactionTimestamp;
 
       daysSinceFirstTransaction = Math.floor(
-        secondsSinceFirst / (24 * 60 * 60)
+        secondsSinceFirst / (24 * 60 * 60),
       );
     }
 
@@ -62,12 +55,9 @@ export const GET: APIRoute = async ({ params }) => {
         "Content-Type": "application/json",
       },
     });
-  } catch (error: any) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  } catch (error) {
+    if (error instanceof Error) throw error;
+
+    throw new Error("Unknown error");
   }
 };

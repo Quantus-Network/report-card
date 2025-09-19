@@ -2,7 +2,6 @@
 import { GET } from "@/pages/api/reports/[address]";
 import Layout from "@/components/layout/Layout.astro";
 import env from "@/config";
-import { createTranslator, getLocaleFromUrl } from "@/utils/i18n";
 import defaultMetadata from "@/constants/default-metadata";
 import type { SEOProps } from "astro-seo";
 import type { EthereumAddressData } from "@/interfaces/EthereumSecurity";
@@ -27,9 +26,6 @@ const { securityScore, addressData, analysisDetails, address } =
 const radius = 90;
 const circumference = 2 * Math.PI * radius;
 const offset = circumference - (securityScore.score / 100) * circumference;
-
-const locale = getLocaleFromUrl(Astro.url.pathname);
-const t = await createTranslator(locale);
 
 const metadata: SEOProps = {
   ...defaultMetadata,
@@ -161,7 +157,7 @@ const metadata: SEOProps = {
             title="Key Exposure"
             content={analysisDetails.publicKeyExposed ? "EXPOSED" : "SECURE"}
             subContent={analysisDetails.daysSinceExposure
-              ? `Public key has been visible for ${analysisDetails.daysSinceExposure} days.`
+              ? `Public key has been visible for ${formatExposureDuration(analysisDetails.daysSinceExposure)}.`
               : undefined}
           />
           <GeneralCard
@@ -194,7 +190,7 @@ const metadata: SEOProps = {
                 Combined with a public key that has been exposed for a long time
                 ${
                   analysisDetails.daysSinceExposure
-                    ? `${analysisDetails.daysSinceExposure} days`
+                    ? `${formatExposureDuration(analysisDetails.daysSinceExposure)}`
                     : "N/A"
                 }, the overall risk increases.`}
           />
