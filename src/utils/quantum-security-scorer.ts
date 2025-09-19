@@ -40,38 +40,8 @@ export const calculateQuantumSecurityScore = (
 
   if (addressData.hasOutgoingTransactions) {
     recommendations.push(
-      "Your public key has been exposed through outgoing transactions, making it vulnerable to quantum attacks.",
+      "Your public key has been exposed through outgoing transactions, making it vulnerable to quantum attacks. Consider moving the funds to a new address.",
     );
-
-    // Additional penalty based on exposure duration
-    if (addressData.daysSinceFirstTransaction) {
-      const days = addressData.daysSinceFirstTransaction;
-      if (days > 365 * 2) {
-        // 2+ years
-        score -= 20;
-        recommendations.push(
-          `Public key has been exposed for ${Math.floor(days / 365)} years, significantly increasing quantum risk.`,
-        );
-      } else if (days > 365) {
-        // 1+ years
-        score -= 15;
-        recommendations.push(
-          `Public key has been exposed for over a year (${Math.floor(days / 365)} years), increasing quantum vulnerability.`,
-        );
-      } else if (days > 180) {
-        // 6+ months
-        score -= 10;
-        recommendations.push(
-          `Public key has been exposed for ${Math.floor(days / 30)} months, creating moderate quantum risk.`,
-        );
-      } else if (days > 30) {
-        // 1+ months
-        score -= 5;
-        recommendations.push(
-          `Public key has been exposed for ${Math.floor(days / 30)} months.`,
-        );
-      }
-    }
   } else {
     recommendations.push(
       "Excellent! No outgoing transactions mean your public key remains secure.",
