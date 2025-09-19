@@ -54,17 +54,17 @@ export const calculateQuantumSecurityScore = (
   if (addressData.balanceEth > 1000) {
     balanceRiskFactor = 25;
     recommendations.push(
-      "Very high balance increases the attractiveness to quantum attackers.",
+      "Your high balance makes your address more attractive to a quantum attacker. Consider splitting your funds into multiple addresses with smaller balances.",
     );
   } else if (addressData.balanceEth > 100) {
     balanceRiskFactor = 20;
     recommendations.push(
-      "High balance makes this address a more valuable target for quantum attacks.",
+      "Your high balance makes your address more attractive to a quantum attacker. Consider splitting your funds into multiple addresses with smaller balances.",
     );
   } else if (addressData.balanceEth > 10) {
     balanceRiskFactor = 15;
     recommendations.push(
-      "Moderate balance poses some risk if quantum computers become available.",
+      "Your high balance makes your address more attractive to a quantum attacker. Consider splitting your funds into multiple addresses with smaller balances.",
     );
   } else if (addressData.balanceEth > 1) {
     balanceRiskFactor = 10;

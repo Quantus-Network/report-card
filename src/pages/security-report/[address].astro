@@ -92,7 +92,7 @@ const metadata: SEOProps = {
           Quantum Security Report
         </h1>
         <p
-          class="font-body-mobile md:font-body mt-4 break-words text-[var(--color-text-content-secondary)]"
+          class="min-[419px]:font-body-mobile md:font-body mt-4 text-[11px] break-words text-[var(--color-text-content-secondary)] min-[367]:text-[13px] min-[342px]:text-xs"
         >
           Analysis for wallet: <strong>{address}</strong>
         </p>
@@ -156,9 +156,6 @@ const metadata: SEOProps = {
           <GeneralCard
             title="Key Exposure"
             content={analysisDetails.publicKeyExposed ? "EXPOSED" : "SECURE"}
-            subContent={analysisDetails.daysSinceExposure
-              ? `Public key has been visible for ${formatExposureDuration(analysisDetails.daysSinceExposure)}.`
-              : undefined}
           />
           <GeneralCard
             title="Balance"
@@ -179,9 +176,9 @@ const metadata: SEOProps = {
           <RiskFactorCard
             title="Public Key Status"
             content={analysisDetails.publicKeyExposed
-              ? `Your public key was likely been exposed for ${formatExposureDuration(
+              ? `Your public key has been exposed for the ${formatExposureDuration(
                   analysisDetails.daysSinceExposure ?? 0,
-                )} when you sent your first transaction. This makes your wallet a potential target for future quantum attacks.`
+                )} since you sent your first transaction. This makes your wallet a potential target for quantum attacks.`
               : "Your public key has not been exposed through outgoing transactions. This is a very strong security posture against quantum threats. To maintain this, consider using this address for receiving funds only."}
           />
           <RiskFactorCard
@@ -201,7 +198,7 @@ const metadata: SEOProps = {
         <h2
           class="font-medium-title-mobile md:font-medium-title mb-8 text-center md:mb-12"
         >
-          Advices
+          Advice
         </h2>
         <ul class="space-y-4">
           {
