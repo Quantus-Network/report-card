@@ -3,6 +3,7 @@ import { GET } from "@/pages/api/reports/[address]";
 import Layout from "@/components/layout/Layout.astro";
 import env from "@/config";
 import { createTranslator, getLocaleFromUrl } from "@/utils/i18n";
+import defaultMetadata from "@/constants/default-metadata";
 import type { SEOProps } from "astro-seo";
 import type { EthereumAddressData } from "@/interfaces/EthereumSecurity";
 import {
@@ -31,7 +32,25 @@ const locale = getLocaleFromUrl(Astro.url.pathname);
 const t = await createTranslator(locale);
 
 const metadata: SEOProps = {
+  ...defaultMetadata,
+  title: `Quantum Security Report for ${address}`,
   canonical: `${env.SITE_BASE_URL}/quantum-security-checker`,
+  openGraph: {
+    ...defaultMetadata.openGraph,
+    basic: {
+      ...defaultMetadata.openGraph!.basic,
+      title: `Your Ethereum Wallet's Quantum Security Score is ${securityScore}`,
+    },
+    optional: {
+      ...defaultMetadata.openGraph!.optional,
+      description: `Is your wallet safe from future quantum attacks? See a detailed security analysis for wallet ${address}, including your grade, risk level, and steps to improve security.`,
+    },
+  },
+  twitter: {
+    ...defaultMetadata.twitter,
+    title: `Your Ethereum Wallet's Quantum Security Score is ${securityScore}`,
+    description: `Is your wallet safe from future quantum attacks? See a detailed security analysis for wallet ${address}, including your grade, risk level, and steps to improve security.`,
+  },
 };
 ---
 

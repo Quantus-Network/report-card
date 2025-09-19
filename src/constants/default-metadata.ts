@@ -6,7 +6,7 @@ const title = {
   default: "Quantus Network - Report Card",
 };
 const description =
-  "A quantum-secure, open-source Layer 1 blockchain built with post-quantum cryptography and zk-proof scalability to future-proof your digital assets.";
+  "Get a comprehensive analysis of your Ethereum wallet's vulnerability to quantum computing threats. View your security score, risk factors, and personalized recommendations.";
 const image = {
   url: `${env.SITE_BASE_URL}/banner-small.jpeg`,
   secureUrl: `${env.SITE_BASE_URL}/banner-small.jpeg`,
