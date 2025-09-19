@@ -198,7 +198,7 @@ const metadata: SEOProps = {
         <h2
           class="font-medium-title-mobile md:font-medium-title mb-8 text-center md:mb-12"
         >
-          Advice
+          {securityScore.recommendations.length > 1 ? "Advices" : "Advice"}
         </h2>
         <ul class="space-y-4">
           {
