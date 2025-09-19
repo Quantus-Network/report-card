@@ -39,7 +39,7 @@ const metadata: SEOProps = {
     ...defaultMetadata.openGraph,
     basic: {
       ...defaultMetadata.openGraph!.basic,
-      title: `Your Ethereum Wallet's Quantum Security Score is ${securityScore}`,
+      title: `Your Ethereum Wallet's Quantum Security Score is ${securityScore.score}`,
     },
     optional: {
       ...defaultMetadata.openGraph!.optional,
@@ -48,7 +48,7 @@ const metadata: SEOProps = {
   },
   twitter: {
     ...defaultMetadata.twitter,
-    title: `Your Ethereum Wallet's Quantum Security Score is ${securityScore}`,
+    title: `Your Ethereum Wallet's Quantum Security Score is ${securityScore.score}`,
     description: `Is your wallet safe from future quantum attacks? See a detailed security analysis for wallet ${address}, including your grade, risk level, and steps to improve security.`,
   },
 };
