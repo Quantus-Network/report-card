@@ -51,7 +51,7 @@ const metadata: SEOProps = {
 ---
 
 <Layout {...metadata}>
-  <div class="relative overflow-hidden">
+  <div id="report-card" class="relative overflow-hidden">
     <div class="absolute -z-10 flex size-full flex-col items-center">
       <SphereDecoration
         class="absolute -top-[0.8rem] -right-[5rem] md:top-[20rem] md:right-[4rem]"
@@ -229,3 +229,33 @@ const metadata: SEOProps = {
     </div>
   </div>
 </Layout>
+
+<script>
+  function reportHeight() {
+    const targetList = [
+      "https://www.quantus.com",
+      "https://www.quantumcanary.org",
+      // "http://localhost:4321",
+    ];
+    const height = document.getElementById("report-card")?.scrollHeight;
+
+    targetList.forEach((target) => {
+      window.parent.postMessage(
+        { type: "iframe-height", height },
+        target, // parent origin
+      );
+    });
+  }
+
+  // Only run if inside iframe
+  if (window.self !== window.top) {
+    window.addEventListener("load", reportHeight);
+    window.addEventListener("resize", reportHeight);
+
+    new MutationObserver(reportHeight).observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+    });
+  }
+</script>
