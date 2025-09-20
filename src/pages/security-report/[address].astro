@@ -12,8 +12,13 @@ import {
 import GeneralCard from "@/components/ui/GeneralCard.astro";
 import RiskFactorCard from "@/components/ui/RiskFactorCard.astro";
 import Separator from "@/components/ui/Separator.astro";
-import { formatExposureDuration } from "@/utils/quantum-security-scorer";
+import {
+  formatExposureDuration,
+  splitAddressIntoChunks,
+} from "@/utils/quantum-security-scorer";
 import SphereDecoration from "@/components/ui/SphereDecoration.astro";
+import { CircleAlert } from "@lucide/astro";
+import ShareButton from "@/components/ui/ShareButton.astro";
 
 const response = await GET(Astro);
 const data = await response.json<EthereumAddressData>();
@@ -21,6 +26,7 @@ const data = await response.json<EthereumAddressData>();
 const securityAnalysis = generateSecurityAnalysis(data);
 const { securityScore, addressData, analysisDetails, address } =
   securityAnalysis;
+const formattedAddress = splitAddressIntoChunks(address).join(" ");
 
 // --- SVG GAUGE CALCULATIONS ---
 const radius = 90;
@@ -92,10 +98,23 @@ const metadata: SEOProps = {
           Quantum Security Report
         </h1>
         <p
-          class="min-[419px]:font-body-mobile md:font-body mt-4 text-[11px] break-words text-[var(--color-text-content-secondary)] min-[367]:text-[13px] min-[342px]:text-xs"
+          class="font-body mt-4 break-words text-[var(--color-text-content-secondary)]"
         >
-          Analysis for wallet: <strong>{address}</strong>
+          Analysis for wallet: <strong class="hidden sm:inline"
+            >{address}</strong
+          >
+          <br class="sm:hidden" />
+          <strong class="mx-auto block w-[263px] sm:hidden"
+            >{formattedAddress}</strong
+          >
         </p>
+
+        <ShareButton
+          url={`https://yoursite.com/report/${address}`}
+          title="Quantum Security Report"
+          description={`Security analysis for wallet ${address}`}
+          className="mt-4"
+        />
       </header>
 
       <section
@@ -204,20 +223,8 @@ const metadata: SEOProps = {
           {
             securityScore.recommendations.map((rec) => (
               <li class="flex items-start">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="mt-1 mr-4 h-6 w-6 flex-shrink-0 text-[var(--color-quantus-pink)]"
-                >
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
+                <CircleAlert class="text-quantus-pink mt-1 mr-4 flex shrink-0" />
+
                 <span class="font-body md:font-large-body text-[var(--color-text-content-secondary)]">
                   {rec}
                 </span>
@@ -235,7 +242,6 @@ const metadata: SEOProps = {
     const targetList = [
       "https://www.quantus.com",
       "https://www.quantumcanary.org",
-      // "http://localhost:4321",
     ];
     const height = document.getElementById("report-card")?.scrollHeight;
 

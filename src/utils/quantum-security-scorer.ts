@@ -190,3 +190,22 @@ export const getRiskColorClass = (
       return "text-[var(--color-text-content-primary)]";
   }
 };
+
+export const splitAddressIntoChunks = (
+  address: string,
+  chunkSize: number = 3,
+) => {
+  if (chunkSize <= 0) throw new Error("Chunk size must be a positive integer.");
+  if (address.length === 0) throw new Error("Address must not be empty.");
+
+  const chunks: string[] = [];
+
+  for (let i = 0; i < address.length; i += chunkSize) {
+    let endIndex = i + chunkSize;
+    if (endIndex > address.length) endIndex = address.length;
+
+    chunks.push(address.substring(i, endIndex));
+  }
+
+  return chunks;
+};

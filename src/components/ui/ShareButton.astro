@@ -1,0 +1,378 @@
+---
+import { Copy } from "@lucide/astro";
+import SocialX from "@/assets/socials/social-x.svg";
+import SocialTelegram from "@/assets/socials/social-telegram.svg";
+
+// ShareButton.astro
+export interface Props {
+  url?: string;
+  title?: string;
+  description?: string;
+  className?: string;
+}
+
+const {
+  url = typeof window !== "undefined" ? window.location.href : "",
+  title = "Quantum Security Report",
+  description = "View this blockchain wallet quantum security analysis",
+  className = "",
+} = Astro.props;
+---
+
+<div class={`quantum-share-button ${className}`}>
+  <button
+    id="shareButton"
+    class="group font-button relative cursor-pointer overflow-hidden rounded-[var(--radius-quantus)] bg-[var(--color-button-primary)] px-6 py-3 text-[var(--color-text-title-primary)] shadow-lg transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl active:scale-95"
+    data-url={url}
+    data-title={title}
+    data-description={description}
+  >
+    <!-- Animated background gradient -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-[var(--color-quantus-pink)] via-[var(--color-quantus-blue)] to-[var(--color-quantus-dark-blue)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+    >
+    </div>
+
+    <!-- Button content -->
+    <div class="relative z-10 flex items-center gap-3">
+      <!-- Share icon -->
+      <svg
+        class="h-5 w-5 transition-transform duration-300 group-hover:rotate-12"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+        ></path>
+      </svg>
+
+      <!-- Button text -->
+      <span class="font-medium tracking-wide">Share Report</span>
+
+      <!-- Pulse effect on hover -->
+      <div
+        class="absolute inset-0 scale-0 rounded-[var(--radius-quantus)] bg-white/20 transition-transform duration-300 group-hover:scale-100 group-hover:animate-ping"
+      >
+      </div>
+    </div>
+
+    <!-- Ripple effect -->
+    <div
+      class="absolute inset-0 -translate-x-full rounded-[var(--radius-quantus)] bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
+    >
+    </div>
+  </button>
+
+  <!-- Share dropdown (for desktop fallback) -->
+  <div
+    id="shareDropdown"
+    class="invisible absolute z-50 mt-2 w-96 scale-100 transform rounded-[var(--radius-quantus)] border border-[var(--color-form-input-body-border)] bg-[var(--color-app-benefit-card)] opacity-0 shadow-xl backdrop-blur-sm transition-all duration-200"
+  >
+    <div class="p-4">
+      <h4 class="font-tag mb-3 text-[var(--color-text-title-primary)]">
+        Share this report
+      </h4>
+
+      <!-- Social sharing options -->
+      <div class="space-y-2">
+        <button
+          class="share-option flex w-full items-center gap-3 rounded-lg p-3 text-left transition-colors duration-200 hover:bg-[var(--color-form-input-body)]"
+          data-platform="twitter"
+        >
+          <div
+            class="bg-button-icon-body flex size-8 items-center justify-center rounded-full p-2"
+          >
+            <SocialX />
+          </div>
+          <div>
+            <p class="font-body text-[var(--color-text-title-primary)]">X</p>
+            <p class="font-small text-[var(--color-text-content-secondary)]">
+              Share on X
+            </p>
+          </div>
+        </button>
+
+        <button
+          class="share-option flex w-full items-center gap-3 rounded-lg p-3 text-left transition-colors duration-200 hover:bg-[var(--color-form-input-body)]"
+          data-platform="telegram"
+        >
+          <div
+            class="bg-button-icon-body flex size-8 items-center justify-center rounded-full p-2"
+          >
+            <SocialTelegram />
+          </div>
+          <div>
+            <p class="font-body text-[var(--color-text-title-primary)]">
+              Telegram
+            </p>
+            <p class="font-small text-[var(--color-text-content-secondary)]">
+              Share on Telegram
+            </p>
+          </div>
+        </button>
+      </div>
+
+      <!-- URL copy section -->
+      <div
+        class="mt-4 border-t border-[var(--color-form-input-body-border)] pt-4"
+      >
+        <p class="font-small mb-2 text-[var(--color-text-content-secondary)]">
+          Or copy link
+        </p>
+        <div class="flex gap-2">
+          <input
+            id="urlInput"
+            type="text"
+            readonly
+            class="font-small flex-1 rounded-lg border border-[var(--color-form-input-body-border)] bg-[var(--color-form-input-body)] px-3 py-2 text-[var(--color-text-title-primary)] focus:border-transparent focus:ring-2 focus:ring-[var(--color-quantus-blue)] focus:outline-none"
+            value={url}
+          />
+          <button
+            id="copyButton"
+            class="font-small cursor-pointer rounded-lg bg-[var(--color-quantus-blue)] px-4 py-2 text-white transition-colors duration-200 hover:bg-[var(--color-quantus-dark-blue)]"
+          >
+            <Copy />
+          </button>
+        </div>
+        <p
+          id="copyFeedback"
+          class="font-small mt-1 text-green-400 opacity-0 transition-opacity duration-200"
+        >
+          Link copied to clipboard!
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .quantum-share-button {
+    position: relative;
+    display: inline-block;
+  }
+
+  .quantum-share-button button {
+    background: var(--color-button-primary);
+    position: relative;
+    z-index: 1;
+  }
+
+  .quantum-share-button button:hover {
+    filter: brightness(1.1);
+  }
+
+  .quantum-share-button button:active {
+    filter: brightness(0.95);
+  }
+
+  #shareDropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+
+  .share-option:hover {
+    cursor: pointer;
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    #shareDropdown {
+      left: 50%;
+      transform: translateX(-50%) scale(0.95);
+      width: 280px;
+    }
+
+    #shareDropdown.show {
+      transform: translateX(-50%) scale(1);
+    }
+  }
+</style>
+
+<script>
+  class QuantumShareButton {
+    button: HTMLElement;
+    dropdown: HTMLElement;
+    copyButton: HTMLElement;
+    urlInput: HTMLInputElement;
+    copyFeedback: HTMLElement;
+
+    constructor() {
+      this.button = document.getElementById("shareButton")!;
+      this.dropdown = document.getElementById("shareDropdown")!;
+      this.copyButton = document.getElementById("copyButton")!;
+      this.urlInput = document.getElementById("urlInput") as HTMLInputElement;
+      this.copyFeedback = document.getElementById("copyFeedback")!;
+
+      this.init();
+    }
+
+    init() {
+      if (!this.button) return;
+
+      // Main share button click
+      this.button.addEventListener("click", this.handleShare.bind(this));
+
+      // Copy button functionality
+      if (this.copyButton) {
+        this.copyButton.addEventListener("click", this.copyUrl.bind(this));
+      }
+
+      // Social platform sharing
+      const shareOptions = document.querySelectorAll(".share-option");
+      shareOptions.forEach((option) => {
+        option.addEventListener("click", (e: any) => {
+          const platform = e.currentTarget!.getAttribute("data-platform");
+          this.shareToSocial(platform);
+        });
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", (e: any) => {
+        if (
+          !this.button.contains(e.target) &&
+          !this.dropdown.contains(e.target)
+        ) {
+          this.hideDropdown();
+        }
+      });
+    }
+
+    async handleShare() {
+      const url = this.button.getAttribute("data-url")!;
+      const title = this.button.getAttribute("data-title")!;
+      const description = this.button.getAttribute("data-description")!;
+
+      // Check if native Web Share API is available (mobile)
+      if (navigator.share && this.isMobileDevice()) {
+        try {
+          await navigator.share({
+            title: title,
+            text: description,
+            url: url,
+          });
+
+          // Add success animation
+          this.showShareSuccess();
+        } catch (err: any) {
+          if (err.name !== "AbortError") {
+            console.log("Error sharing:", err);
+            this.showDropdown();
+          }
+        }
+      } else {
+        // Fallback to dropdown for desktop
+        this.toggleDropdown();
+      }
+    }
+
+    toggleDropdown() {
+      if (this.dropdown.classList.contains("show")) {
+        this.hideDropdown();
+      } else {
+        this.showDropdown();
+      }
+    }
+
+    showDropdown() {
+      this.dropdown.classList.add("show");
+    }
+
+    hideDropdown() {
+      this.dropdown.classList.remove("show");
+    }
+
+    async copyUrl() {
+      const url = this.urlInput.value;
+
+      try {
+        await navigator.clipboard.writeText(url);
+        this.showCopyFeedback();
+      } catch (err) {
+        // Fallback for older browsers
+        this.urlInput.select();
+        document.execCommand("copy");
+        this.showCopyFeedback();
+      }
+    }
+
+    showCopyFeedback() {
+      this.copyFeedback.style.opacity = "1";
+      this.copyButton.textContent = "Copied!";
+      this.copyButton.style.backgroundColor = "var(--color-quantus-pink)";
+
+      setTimeout(() => {
+        this.copyFeedback.style.opacity = "0";
+        this.copyButton.textContent = "Copy";
+        this.copyButton.style.backgroundColor = "var(--color-quantus-blue)";
+      }, 2000);
+    }
+
+    shareToSocial(platform: any) {
+      const url = this.button.getAttribute("data-url")!;
+      const title = this.button.getAttribute("data-title")!;
+      const description = this.button.getAttribute("data-description")!;
+
+      const encodedUrl = encodeURIComponent(url);
+      const encodedTitle = encodeURIComponent(title);
+      const encodedDescription = encodeURIComponent(description);
+
+      let shareUrl = "";
+
+      switch (platform) {
+        case "twitter":
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodedDescription}&url=${encodedUrl}`;
+          break;
+        case "linkedin":
+          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+          break;
+        case "telegram":
+          shareUrl = `https://t.me/share/url?url=${encodedUrl}&text=${encodedDescription}`;
+          break;
+        default:
+          return;
+      }
+
+      // Open in new window
+      window.open(shareUrl, "_blank", "width=600,height=400");
+      this.hideDropdown();
+    }
+
+    showShareSuccess() {
+      // Add a temporary success state to the button
+      const originalText = this.button.querySelector("span")!.textContent;
+      const span = this.button.querySelector("span")!;
+
+      span.textContent = "Shared!";
+      this.button.style.background = "var(--color-quantus-pink)";
+
+      setTimeout(() => {
+        span.textContent = originalText;
+        this.button.style.background = "var(--color-button-primary)";
+      }, 2000);
+    }
+
+    isMobileDevice() {
+      const hasTouchEvent = window
+        ? "ontouchstart" in window.document.documentElement
+        : false;
+
+      return (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent,
+        ) ||
+        window.innerWidth <= 768 ||
+        hasTouchEvent
+      );
+    }
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    new QuantumShareButton();
+  });
+</script>
