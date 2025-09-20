@@ -110,7 +110,7 @@ const metadata: SEOProps = {
         </p>
 
         <ShareButton
-          url={`https://yoursite.com/report/${address}`}
+          url={`${env.SITE_BASE_URL}/security-report/${address}`}
           title="Quantum Security Report"
           description={`Security analysis for wallet ${address}`}
           className="mt-4"
