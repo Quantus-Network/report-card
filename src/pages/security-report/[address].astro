@@ -11,14 +11,11 @@ import {
 } from "@/utils/quantum-security-scorer";
 import GeneralCard from "@/components/ui/GeneralCard.astro";
 import RiskFactorCard from "@/components/ui/RiskFactorCard.astro";
-import Separator from "@/components/ui/Separator.astro";
-import {
-  formatExposureDuration,
-  splitAddressIntoChunks,
-} from "@/utils/quantum-security-scorer";
+import { formatExposureDuration } from "@/utils/quantum-security-scorer";
 import SphereDecoration from "@/components/ui/SphereDecoration.astro";
-import { CircleAlert } from "@lucide/astro";
+import { ArrowRight, Hourglass } from "@lucide/astro";
 import ShareButton from "@/components/ui/ShareButton.astro";
+import Button from "@/components/ui/Button.astro";
 
 const response = await GET(Astro);
 const data = await response.json<EthereumAddressData>();
@@ -26,7 +23,6 @@ const data = await response.json<EthereumAddressData>();
 const securityAnalysis = generateSecurityAnalysis(data);
 const { securityScore, addressData, analysisDetails, address } =
   securityAnalysis;
-const formattedAddress = splitAddressIntoChunks(address).join(" ");
 
 // --- SVG GAUGE CALCULATIONS ---
 const radius = 90;
@@ -60,14 +56,14 @@ const metadata: SEOProps = {
   <div id="report-card" class="relative overflow-hidden">
     <div class="absolute -z-10 flex size-full flex-col items-center">
       <SphereDecoration
-        class="absolute -top-[0.8rem] -right-[5rem] md:top-[20rem] md:right-[4rem]"
-        variant="1"
-        size={202}
+        class="absolute -top-[0.8rem] -right-[5rem] md:top-[20rem] md:right-[8rem]"
+        variant="17"
+        size={241}
       />
       <SphereDecoration
         class="absolute top-[6.5rem] md:top-[42rem]"
-        variant="2"
-        size={320}
+        variant="18"
+        size={371}
       />
       <SphereDecoration
         class="absolute bottom-[4.5rem] -left-[6rem] md:hidden"
@@ -97,24 +93,37 @@ const metadata: SEOProps = {
         >
           Quantum Security Report
         </h1>
-        <p
-          class="font-body mt-4 break-words text-[var(--color-text-content-secondary)]"
-        >
-          Analysis for wallet: <strong class="hidden sm:inline"
-            >{address}</strong
+        <p class="font-body mt-4 break-words">
+          <span class="font-large-body font-semibold">Analysis for wallet:</span
           >
-          <br class="sm:hidden" />
-          <strong class="mx-auto block w-[263px] sm:hidden"
-            >{formattedAddress}</strong
+          <br />
+          <strong class="font-tag hidden md:inline">{address}</strong>
+          <strong
+            class="min-[340px]:font-tag mx-auto block w-[235px] min-[340px]:w-[315px] md:hidden"
+            >{address}</strong
           >
         </p>
 
-        <ShareButton
-          url={`${env.SITE_BASE_URL}/security-report/${address}`}
-          title="Quantum Security Report"
-          description={`Security analysis for wallet ${address}`}
-          className="mt-4"
-        />
+        <div
+          class="mt-5 flex flex-col items-center justify-center gap-5 sm:flex-row"
+        >
+          <Button
+            variant="outline"
+            href={env.QUANTUS_RISK_CHECKER_URL}
+            class="order-2 sm:order-1"
+          >
+            <div class="flex items-center gap-2 min-[340px]:gap-4">
+              <span>Check another address</span>
+              <ArrowRight />
+            </div>
+          </Button>
+          <ShareButton
+            url={`${env.SITE_BASE_URL}/security-report/${address}`}
+            title="Quantum Security Report"
+            description={`Security analysis for wallet ${address}`}
+            className="order-1 sm:order-2"
+          />
+        </div>
       </header>
 
       <section
@@ -170,7 +179,7 @@ const metadata: SEOProps = {
           </div>
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-6 lg:max-w-[398px]">
           <GeneralCard title="Risk Level" content={securityScore.riskLevel} />
           <GeneralCard
             title="Key Exposure"
@@ -183,12 +192,8 @@ const metadata: SEOProps = {
         </div>
       </section>
 
-      <Separator />
-
       <section>
-        <h2
-          class="font-medium-title-mobile md:font-medium-title mb-8 text-center md:mb-12"
-        >
+        <h2 class="font-medium-title-mobile md:font-medium-title mb-8 md:mb-12">
           Risk Factors
         </h2>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
@@ -212,18 +217,20 @@ const metadata: SEOProps = {
           />
         </div>
       </section>
+    </div>
 
-      <section class="mx-auto max-w-3xl">
-        <h2
-          class="font-medium-title-mobile md:font-medium-title mb-8 text-center md:mb-12"
-        >
+    <section class="bg-advice">
+      <div
+        class="max-w-content mx-auto space-y-16 px-4 py-20 md:space-y-24 2xl:px-0"
+      >
+        <h2 class="font-medium-title-mobile md:font-medium-title mb-8 md:mb-12">
           {securityScore.recommendations.length > 1 ? "Advices" : "Advice"}
         </h2>
         <ul class="space-y-4">
           {
             securityScore.recommendations.map((rec) => (
-              <li class="flex items-start">
-                <CircleAlert class="text-quantus-pink mt-1 mr-4 flex shrink-0" />
+              <li class="flex max-w-[640px] items-start">
+                <Hourglass class="text-quantus-yellow mt-1 mr-4 flex shrink-0" />
 
                 <span class="font-body md:font-large-body text-[var(--color-text-content-secondary)]">
                   {rec}
@@ -232,8 +239,8 @@ const metadata: SEOProps = {
             ))
           }
         </ul>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </Layout>
 

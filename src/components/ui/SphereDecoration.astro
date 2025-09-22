@@ -17,7 +17,9 @@ type Variant =
   | "13"
   | "14"
   | "15"
-  | "16";
+  | "16"
+  | "17"
+  | "18";
 
 interface Props {
   variant: Variant;
@@ -186,5 +188,22 @@ const { variant, size, class: className } = Astro.props;
       #0c1014 85.85%
     );
     filter: blur(12.5px);
+  }
+
+  .sphere-17 {
+    background: linear-gradient(320deg, #ed4cce 28.03%, #ffe91f 100%);
+    opacity: 0.5;
+    filter: blur(15px);
+  }
+
+  .sphere-18 {
+    opacity: 0.5;
+    background: linear-gradient(
+      150deg,
+      #00f 13.42%,
+      #ed4cce 44.7%,
+      #ffe91f 81.08%
+    );
+    filter: blur(15px);
   }
 </style>

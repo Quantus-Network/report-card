@@ -1,5 +1,6 @@
 ---
 import "../../styles/global.css";
+import "@fontsource/prompt/100.css";
 import "@fontsource/prompt/200.css";
 import "@fontsource/prompt/300.css";
 import "@fontsource/prompt/400.css";
@@ -10,6 +11,8 @@ import "@fontsource/inter/900.css";
 
 import { SEO, type SEOProps } from "astro-seo";
 import defaultMetadata from "@/constants/default-metadata";
+import Footer from "./footer/Footer.astro";
+import Navbar from "./navbar/Navbar.astro";
 
 interface Props extends SEOProps {}
 
@@ -32,9 +35,21 @@ const metadata = {
     <meta name="generator" content={Astro.generator} />
     <SEO {...metadata} titleTemplate={undefined} />
   </head>
-  <body class="flex grow flex-col">
+  <body class="flex grow flex-col pt-[220px] md:pt-[139px]">
+    <Navbar />
+
     <main class="grow">
       <slot />
     </main>
+
+    <Footer />
   </body>
 </html>
+
+<script>
+  // Remove navbar padding if iframed
+  if (window.self !== window.top) {
+    document.body.classList.remove("md:pt-[139px]");
+    document.body.classList.remove("pt-[220px]");
+  }
+</script>

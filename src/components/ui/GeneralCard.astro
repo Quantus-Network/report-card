@@ -20,12 +20,10 @@ const { title, content, subContent, class: className } = Astro.props;
 >
   <Separator class="absolute top-0 left-0" variant="2" />
 
-  <h3
-    class="font-tag-caps-mobile md:font-tag-caps text-[var(--color-text-title-secondary)]"
-  >
+  <h3 class="font-tag-mobile md:font-tag text-quantus-yellow">
     {title}
   </h3>
-  <p class="font-small-title">{content}</p>
+  <p class="font-tag-caps">{content}</p>
   {
     subContent && (
       <p class="font-small mt-2 text-[var(--color-text-content-secondary)]">

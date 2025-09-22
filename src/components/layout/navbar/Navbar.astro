@@ -1,0 +1,114 @@
+---
+import env from "@/config";
+
+import BrandLogo from "@/assets/brand/brand-logo.svg";
+import BrandName from "@/assets/brand/brand-name.svg";
+
+import Separator from "@/components/ui/Separator.astro";
+import Button from "@/components/ui/Button.astro";
+---
+
+<nav
+  id="navbar"
+  class="bg-navbar-body navbar-desktop:pt-[50px] fixed top-0 z-10 h-[220px] w-full pt-[70px] transition-opacity md:h-[139px]"
+  role="navigation"
+  aria-label="Main navigation"
+>
+  <div
+    class="navbar-desktop:px-20 navbar-desktop:pb-[50px] navbar-desktop:max-w-navbar mx-auto px-[30px] pb-[30px]"
+  >
+    <div class="flex items-center justify-center md:justify-between">
+      <!-- Logo/Brand -->
+      <div class="flex flex-shrink-0 flex-col items-center gap-6 md:flex-row">
+        <a
+          href={env.QUANTUS_SITE_URL}
+          class="flex items-center gap-3 hover:brightness-125"
+        >
+          <BrandLogo title="Quantus's brand logo" />
+          <BrandName title="Quantus's brand name" />
+        </a>
+
+        <p
+          class="text-quantus-yellow font-qday-title text-3xl min-[340px]:text-[33px]"
+        >
+          Q-day Risk Checker
+        </p>
+      </div>
+
+      <div class="navbar-desktop:block hidden">
+        <Button target="_self" href={env.QUANTUS_SITE_URL}
+          >Back to Quantus</Button
+        >
+      </div>
+    </div>
+  </div>
+
+  <Separator class="absolute bottom-0" />
+</nav>
+
+<style>
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    nav {
+      border-width: 2px;
+    }
+
+    a:focus {
+      outline: 2px solid;
+      outline-offset: 2px;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<!-- Script for handling dissapear and appear of navbar -->
+<script>
+  const navbarEl = document.getElementById("navbar");
+
+  let prevScrollOffsetRef = 0;
+  let prevScrollDirection: "idle" | "down" | "up" = "idle";
+
+  const handleToggleOpacity = (e: Event) => {
+    // The logic here is using the navbar height as reference so we not have empty area when the navbar is hidden.
+    const isLgWidth = window?.innerWidth >= 992;
+    const isMdWidth = window?.innerWidth >= 768;
+    const isXsWidth = window?.innerWidth < 405;
+    const isTransitionWidth = !isMdWidth && !isXsWidth;
+
+    let validOffsetThreshold = 86.87;
+    if (isTransitionWidth) validOffsetThreshold = 158.87;
+    if (isXsWidth) validOffsetThreshold = 176.87;
+    if (isLgWidth) validOffsetThreshold = 131.87;
+
+    const currentOffset = window?.pageYOffset;
+    const isValidOffset = window?.pageYOffset > validOffsetThreshold;
+
+    const isJustScrollingUp =
+      prevScrollDirection !== "up" && prevScrollOffsetRef > currentOffset;
+    const isJustScrollingDown =
+      prevScrollDirection !== "down" && prevScrollOffsetRef < currentOffset;
+
+    if ((isJustScrollingUp || isJustScrollingDown) && isValidOffset) {
+      navbarEl?.classList.toggle("opacity-0");
+      navbarEl?.classList.toggle("pointer-events-none");
+
+      prevScrollDirection = isJustScrollingUp ? "up" : "down";
+    }
+
+    prevScrollOffsetRef = currentOffset;
+  };
+
+  // Remove navbar if iframed
+  if (window.self !== window.top) {
+    navbarEl?.classList.remove("fixed");
+    navbarEl?.classList.add("relative");
+  } else {
+    window.addEventListener("scroll", handleToggleOpacity);
+  }
+</script>

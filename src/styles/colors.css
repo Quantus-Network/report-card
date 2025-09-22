@@ -25,6 +25,7 @@
   --color-quantus-pink: #ed4cce;
   --color-quantus-blue: #0000ff;
   --color-quantus-dark-blue: #1f1fa3;
+  --color-quantus-yellow: #ffe91f;
 
   /* Button Colors */
   --color-button-primary: linear-gradient(
@@ -32,6 +33,12 @@
     var(--color-quantus-pink) 8.23%,
     var(--color-quantus-blue) 56.37%,
     var(--color-quantus-dark-blue) 85.85%
+  );
+  /* Button Colors */
+  --color-button-secondary: linear-gradient(
+    180deg,
+    var(--color-quantus-pink) 28.03%,
+    var(--color-quantus-yellow) 100%
   );
   --color-button-outline: #f4f6f9;
 
@@ -60,6 +67,7 @@
     #83acf0 11.18%,
     rgba(12, 16, 20, 0.1) 108.37%
   );
+  --color-text-content-black: #0c1014;
 
   /* Form Colors */
   --color-form-body: #ffffff0a;
@@ -124,6 +132,15 @@
     #00f 41.12%,
     #ed4cce 65.8%,
     #ffe91f 83.35%
+  );
+}
+@utility bg-advice {
+  background: linear-gradient(
+    48deg,
+    #1f1fa3 13.51%,
+    #00f 34.05%,
+    #ed4cce 67.91%,
+    #ffe91f 97.74%
   );
 }
 @utility border-top-separator {
