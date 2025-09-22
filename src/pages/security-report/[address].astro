@@ -250,7 +250,7 @@ const metadata: SEOProps = {
       "https://www.quantus.com",
       "https://www.quantumcanary.org",
     ];
-    const height = document.getElementById("report-card")?.scrollHeight;
+    const height = document.body?.scrollHeight;
 
     targetList.forEach((target) => {
       window.parent.postMessage(
