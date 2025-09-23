@@ -35,7 +35,7 @@ const metadata = {
     <meta name="generator" content={Astro.generator} />
     <SEO {...metadata} titleTemplate={undefined} />
   </head>
-  <body class="flex grow flex-col pt-[220px] md:pt-[139px]">
+  <body class="flex grow flex-col">
     <Navbar />
 
     <main class="grow">
@@ -45,11 +45,3 @@ const metadata = {
     <Footer />
   </body>
 </html>
-
-<script>
-  // Remove navbar padding if iframed
-  if (window.self !== window.top) {
-    document.body.classList.remove("md:pt-[139px]");
-    document.body.classList.remove("pt-[220px]");
-  }
-</script>

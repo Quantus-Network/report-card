@@ -10,7 +10,7 @@ import Button from "@/components/ui/Button.astro";
 
 <nav
   id="navbar"
-  class="bg-navbar-body navbar-desktop:pt-[50px] fixed top-0 z-10 h-[220px] w-full pt-[70px] transition-opacity md:h-[139px]"
+  class="bg-navbar-body navbar-desktop:pt-[50px] relative top-0 z-10 h-[220px] w-full pt-[70px] transition-opacity md:h-[139px]"
   role="navigation"
   aria-label="Main navigation"
 >
@@ -66,49 +66,3 @@ import Button from "@/components/ui/Button.astro";
     }
   }
 </style>
-
-<!-- Script for handling dissapear and appear of navbar -->
-<script>
-  const navbarEl = document.getElementById("navbar");
-
-  let prevScrollOffsetRef = 0;
-  let prevScrollDirection: "idle" | "down" | "up" = "idle";
-
-  const handleToggleOpacity = (e: Event) => {
-    // The logic here is using the navbar height as reference so we not have empty area when the navbar is hidden.
-    const isLgWidth = window?.innerWidth >= 992;
-    const isMdWidth = window?.innerWidth >= 768;
-    const isXsWidth = window?.innerWidth < 405;
-    const isTransitionWidth = !isMdWidth && !isXsWidth;
-
-    let validOffsetThreshold = 86.87;
-    if (isTransitionWidth) validOffsetThreshold = 158.87;
-    if (isXsWidth) validOffsetThreshold = 176.87;
-    if (isLgWidth) validOffsetThreshold = 131.87;
-
-    const currentOffset = window?.pageYOffset;
-    const isValidOffset = window?.pageYOffset > validOffsetThreshold;
-
-    const isJustScrollingUp =
-      prevScrollDirection !== "up" && prevScrollOffsetRef > currentOffset;
-    const isJustScrollingDown =
-      prevScrollDirection !== "down" && prevScrollOffsetRef < currentOffset;
-
-    if ((isJustScrollingUp || isJustScrollingDown) && isValidOffset) {
-      navbarEl?.classList.toggle("opacity-0");
-      navbarEl?.classList.toggle("pointer-events-none");
-
-      prevScrollDirection = isJustScrollingUp ? "up" : "down";
-    }
-
-    prevScrollOffsetRef = currentOffset;
-  };
-
-  // Remove navbar if iframed
-  if (window.self !== window.top) {
-    navbarEl?.classList.remove("fixed");
-    navbarEl?.classList.add("relative");
-  } else {
-    window.addEventListener("scroll", handleToggleOpacity);
-  }
-</script>
