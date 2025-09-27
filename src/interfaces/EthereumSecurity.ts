@@ -9,8 +9,8 @@ export interface EthereumAddressData {
 
 export interface QuantumSecurityScore {
   score: number; // 0-100, where 100 is most secure
-  grade: 'A+' | 'A' | 'B' | 'C' | 'D' | 'F';
-  riskLevel: 'Very Low' | 'Low' | 'Medium' | 'High' | 'Very High';
+  grade: "A+" | "A" | "B" | "C" | "D" | "E" | "F";
+  riskLevel: "Very Low" | "Low" | "Medium" | "High" | "Very High";
   recommendations: string[];
 }
 

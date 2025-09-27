@@ -26,6 +26,12 @@
   --color-quantus-blue: #0000ff;
   --color-quantus-dark-blue: #1f1fa3;
   --color-quantus-yellow: #ffe91f;
+  --color-quantus-red: #ff1f45;
+  --color-quantus-dark-pink: #bf1062;
+  --color-quantus-purple: #991fff;
+  --color-quantus-orange: #ff791f;
+  --color-quantus-aqua: #16cece;
+  --color-quantus-green: #1fffa7;
 
   /* Button Colors */
   --color-button-primary: linear-gradient(
