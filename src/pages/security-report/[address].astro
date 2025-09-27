@@ -8,7 +8,7 @@ import type { EthereumAddressData } from "@/interfaces/EthereumSecurity";
 import {
   generateSecurityAnalysis,
   getGradeColorClass,
-  getOgImagePath,
+  getOgImageFileName,
 } from "@/utils/quantum-security-scorer";
 import GeneralCard from "@/components/ui/GeneralCard.astro";
 import RiskFactorCard from "@/components/ui/RiskFactorCard.astro";
@@ -34,7 +34,7 @@ const ogTitle = `Quantum Security Score: ${securityScore.score}, Grade ${securit
 const ogDesc =
   "Is your wallet safe from future quantum attacks? Analyse any Ethereum address to get the score, grade, risk level and steps to improve security.";
 const ogCanonical = `${env.SITE_BASE_URL}/security-report/${address}`;
-const ogImagePath = getOgImagePath(securityScore.grade);
+const ogImagePath = getOgImageFileName(securityScore.grade);
 const ogImage = {
   url: `${env.SITE_BASE_URL}/grades/${ogImagePath}`,
   secureUrl: `${env.SITE_BASE_URL}/grades/${ogImagePath}`,
