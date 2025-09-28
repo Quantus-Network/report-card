@@ -13,10 +13,11 @@ export const GET: APIRoute = async ({ params }) => {
     throw new Error("Invalid Ethereum address format");
 
   try {
-    // Fetch balance and check if has transactions
-    const [balance, hasOutgoingTransactions] = await Promise.all([
+    // Fetch balance, check if has transactions, and detect smart contract
+    const [balance, hasOutgoingTransactions, isSmartContract] = await Promise.all([
       etherscan.getBalance(address),
       etherscan.hasAnyTransactions(address),
+      etherscan.isSmartContract(address),
     ]);
 
     const balanceEth = etherscan.weiToEth(balance);
@@ -46,6 +47,7 @@ export const GET: APIRoute = async ({ params }) => {
       hasOutgoingTransactions,
       firstTransactionTimestamp,
       daysSinceFirstTransaction,
+      isSmartContract,
     };
 
     // Return the report data as JSON

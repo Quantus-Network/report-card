@@ -125,10 +125,23 @@ const weiToEth = (wei: string): number => {
   return ethNum;
 };
 
+const isSmartContract = async (address: string): Promise<boolean> => {
+  try {
+    const response = await fetchEtherscanData("proxy", "eth_getCode", address);
+    // If the result is "0x" it means no code, so it's an EOA (Externally Owned Account)
+    // If there's code, it's a smart contract
+    return response.result !== "0x";
+  } catch (error) {
+    // If we can't determine, assume it's not a contract for safety
+    return false;
+  }
+};
+
 export {
   weiToEth,
   fetchEtherscanData,
   getBalance,
   hasAnyTransactions,
   getFirstTransactionTimestamp,
+  isSmartContract,
 };

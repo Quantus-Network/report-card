@@ -84,8 +84,7 @@ const metadata: SEOProps = {
           Quantum Security Report
         </h1>
         <p class="font-body mt-4 break-words">
-          <span class="font-large-body font-semibold">Analysis for wallet:</span
-          >
+          <span class="font-large-body font-semibold">Analysis for wallet:</span>
           <br />
           <strong class="font-tag hidden md:inline">{address}</strong>
           <strong
@@ -175,6 +174,12 @@ const metadata: SEOProps = {
             title="Key Exposure"
             content={analysisDetails.publicKeyExposed ? "EXPOSED" : "SECURE"}
           />
+          {addressData.isSmartContract && (
+            <GeneralCard
+              title="Address Type"
+              content="SMART CONTRACT"
+            />
+          )}
           <GeneralCard
             title="Balance"
             content={`${addressData.balanceEth.toFixed(4)} ETH`}

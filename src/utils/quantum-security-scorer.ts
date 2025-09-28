@@ -34,59 +34,71 @@ export const calculateQuantumSecurityScore = (
   let score = 100; // Start with perfect score
   const recommendations: string[] = [];
 
-  // Factor 1: Public Key Exposure (most critical)
-  const publicKeyExposedPenalty = addressData.hasOutgoingTransactions ? 40 : 0;
-  score -= publicKeyExposedPenalty;
-
-  if (addressData.hasOutgoingTransactions) {
+  if (addressData.isSmartContract) {
+    // For now, use the same logic but you can customize this
     recommendations.push(
-      "Your public key has been exposed through outgoing transactions, making it vulnerable to quantum attacks. Consider moving the funds to a new address.",
+      "This is a smart contract. Smart contract quantum security analysis coming soon!",
     );
   } else {
-    recommendations.push(
-      "Excellent! No outgoing transactions mean your public key remains secure.",
-    );
+    // Factor 1: Public Key Exposure (most critical)
+    const publicKeyExposedPenalty = addressData.hasOutgoingTransactions ? 40 : 0;
+    score -= publicKeyExposedPenalty;
+  
+    if (addressData.hasOutgoingTransactions) {
+      recommendations.push(
+        "Your public key has been exposed through outgoing transactions, making it vulnerable to quantum attacks. Consider moving the funds to a new address.",
+      );
+    } else {
+      recommendations.push(
+        "Excellent! No outgoing transactions mean your public key remains secure.",
+      );
+    }
+  
+    // Factor 2: Balance Risk (higher balance = higher risk if compromised)
+    let balanceRiskFactor = 0;
+  
+    if (addressData.balanceEth > 10000) {
+      balanceRiskFactor = 55;
+      recommendations.push(
+        "Your high balance makes your address more attractive to a quantum attacker. Consider splitting your funds into multiple addresses with smaller balances.",
+      );
+    } else if (addressData.balanceEth > 1000) {
+      balanceRiskFactor = 40;
+      recommendations.push(
+        "Your high balance makes your address more attractive to a quantum attacker. Consider splitting your funds into multiple addresses with smaller balances.",
+      );
+    } else if (addressData.balanceEth > 100) {
+      balanceRiskFactor = 30;
+      recommendations.push(
+        "Your high balance makes your address more attractive to a quantum attacker. Consider splitting your funds into multiple addresses with smaller balances.",
+      );
+    } else if (addressData.balanceEth > 10) {
+      balanceRiskFactor = 20;
+      recommendations.push(
+        "Your high balance makes your address more attractive to a quantum attacker. Consider splitting your funds into multiple addresses with smaller balances.",
+      );
+    } else if (addressData.balanceEth > 1) {
+      balanceRiskFactor = 10;
+    } else if (addressData.balanceEth > 0) {
+      balanceRiskFactor = 5;
+    }
+  
+    score -= balanceRiskFactor;
+  
+    // Add positive recommendations for good security
+    if (!addressData.hasOutgoingTransactions && addressData.balanceEth > 0) {
+      recommendations.push(
+        "Consider using this address only for receiving funds to maintain quantum security.",
+      );
+    }
+  
+    if (addressData.balanceEth === 0) {
+      recommendations.push("Empty address has minimal quantum risk exposure.");
+    }    
   }
-
-  // Factor 2: Balance Risk (higher balance = higher risk if compromised)
-  let balanceRiskFactor = 0;
-
-  if (addressData.balanceEth > 1000) {
-    balanceRiskFactor = 25;
-    recommendations.push(
-      "Your high balance makes your address more attractive to a quantum attacker. Consider splitting your funds into multiple addresses with smaller balances.",
-    );
-  } else if (addressData.balanceEth > 100) {
-    balanceRiskFactor = 20;
-    recommendations.push(
-      "Your high balance makes your address more attractive to a quantum attacker. Consider splitting your funds into multiple addresses with smaller balances.",
-    );
-  } else if (addressData.balanceEth > 10) {
-    balanceRiskFactor = 15;
-    recommendations.push(
-      "Your high balance makes your address more attractive to a quantum attacker. Consider splitting your funds into multiple addresses with smaller balances.",
-    );
-  } else if (addressData.balanceEth > 1) {
-    balanceRiskFactor = 10;
-  } else if (addressData.balanceEth > 0) {
-    balanceRiskFactor = 5;
-  }
-
-  score -= balanceRiskFactor;
 
   // Ensure score doesn't go below 0
   score = Math.max(0, score);
-
-  // Add positive recommendations for good security
-  if (!addressData.hasOutgoingTransactions && addressData.balanceEth > 0) {
-    recommendations.push(
-      "Consider using this address only for receiving funds to maintain quantum security.",
-    );
-  }
-
-  if (addressData.balanceEth === 0) {
-    recommendations.push("Empty address has minimal quantum risk exposure.");
-  }
 
   return {
     score: Math.round(score),
