@@ -17,6 +17,7 @@ import SphereDecoration from "@/components/ui/SphereDecoration.astro";
 import { ArrowRight, Hourglass } from "@lucide/astro";
 import ShareButton from "@/components/ui/ShareButton.astro";
 import Button from "@/components/ui/Button.astro";
+import AddressSearchForm from "@/components/ui/AddressSearchForm.astro";
 
 const response = await GET(Astro);
 const data = await response.json<EthereumAddressData>();
@@ -117,21 +118,22 @@ const metadata: SEOProps = {
         <div
           class="mt-5 flex flex-col items-center justify-center gap-5 sm:flex-row"
         >
-          <Button
-            variant="outline"
-            href={env.QUANTUS_RISK_CHECKER_URL}
-            class="order-2 sm:order-1"
-          >
-            <div class="flex items-center gap-2 min-[340px]:gap-4">
-              <span>Check another address</span>
-              <ArrowRight />
-            </div>
-          </Button>
           <ShareButton
             url={`${env.SITE_BASE_URL}/security-report/${address}`}
             title="Quantum Security Report"
             description={`Security analysis for wallet ${address}`}
             className="order-1 sm:order-2"
+          />
+        </div>
+
+        <div class="mt-8 max-w-md mx-auto">
+          <h3 class="font-large-body font-semibold text-[var(--color-text-title-primary)] text-center mb-4">
+            Check Another Address
+          </h3>
+          <AddressSearchForm
+            placeholder="Enter another address..."
+            buttonText="Analyze"
+            showDescription={false}
           />
         </div>
       </header>
@@ -214,7 +216,7 @@ const metadata: SEOProps = {
         { addressData.isSmartContract ? (
           <RiskFactorCard
             title="Smart Contract Status"
-            content={`Smart contracts addresses are not derived from keys, so they cannot be directly compromised in the same way that external accounts can. However, smart contracts often hold large amounts of funds on behalf of their users, 
+            content={`Smart contracts addresses are not derived from keys, so they cannot be directly compromised in the same way that external accounts can. However, smart contracts often hold large amounts of funds on behalf of their users,
                 and these funds are typically secured by elliptic curve keys and are therefore vulnerable to a quantum attacker. More detailed analysis coming soon!`}
           />
         ) : (
