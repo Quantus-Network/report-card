@@ -10,6 +10,7 @@ const getGrade = (score: number): QuantumSecurityScore["grade"] => {
   if (score >= 75) return "B";
   if (score >= 65) return "C";
   if (score >= 50) return "D";
+  if (score >= 35) return "D";
   return "F";
 };
 
@@ -185,21 +186,51 @@ export const formatExposureDuration = (days: number): string => {
     : `${years} years`;
 };
 
-// Determines the text color class based on the risk level for emphasis
-export const getRiskColorClass = (
-  riskLevel: QuantumSecurityScore["riskLevel"],
+// Determines the text color class based on the grade for emphasis
+export const getGradeColorClass = (
+  grade: QuantumSecurityScore["grade"],
 ): string => {
-  switch (riskLevel) {
-    case "Very Low":
-    case "Low":
-      return "text-[var(--color-quantus-blue)]";
-    case "Medium":
-      return "text-yellow-400"; // A neutral, attention-grabbing color
-    case "High":
-    case "Very High":
-      return "text-[var(--color-input-error)]";
+  switch (grade) {
+    case "A+":
+      return "text-[var(--color-quantus-green)]";
+    case "A":
+      return "text-[var(--color-quantus-aqua)]";
+    case "B":
+      return "text-[var(--color-quantus-yellow)]";
+    case "C":
+      return "text-[var(--color-quantus-orange)]";
+    case "D":
+      return "text-[var(--color-quantus-purple)]";
+    case "E":
+      return "text-[var(--color-quantus-dark-pink)]";
+    case "F":
+      return "text-[var(--color-quantus-red)]";
     default:
-      return "text-[var(--color-text-content-primary)]";
+      return "text-[var(--color-quantus-red)]";
+  }
+};
+
+// Determines the grade og image based on the grade
+export const getOgImageFileName = (
+  grade: QuantumSecurityScore["grade"],
+): String => {
+  switch (grade) {
+    case "A+":
+      return "Qday_score_A+.png";
+    case "A":
+      return "Qday_score_A.png";
+    case "B":
+      return "Qday_score_B.png";
+    case "C":
+      return "Qday_score_C.png";
+    case "D":
+      return "Qday_score_D.png";
+    case "E":
+      return "Qday_score_E.png";
+    case "F":
+      return "Qday_score_F.png";
+    default:
+      return "Qday_score_F.png";
   }
 };
 

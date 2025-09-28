@@ -7,7 +7,8 @@ import type { SEOProps } from "astro-seo";
 import type { EthereumAddressData } from "@/interfaces/EthereumSecurity";
 import {
   generateSecurityAnalysis,
-  getRiskColorClass,
+  getGradeColorClass,
+  getOgImageFileName,
 } from "@/utils/quantum-security-scorer";
 import GeneralCard from "@/components/ui/GeneralCard.astro";
 import RiskFactorCard from "@/components/ui/RiskFactorCard.astro";
@@ -29,25 +30,45 @@ const radius = 90;
 const circumference = 2 * Math.PI * radius;
 const offset = circumference - (securityScore.score / 100) * circumference;
 
+const ogTitle = `Quantum Security Score: ${securityScore.score}, Grade ${securityScore.grade}`;
+const ogDesc =
+  "Is your wallet safe from future quantum attacks? Analyse any Ethereum address to get the score, grade, risk level and steps to improve security.";
+const ogCanonical = `${env.SITE_BASE_URL}/security-report/${address}`;
+const ogImagePath = getOgImageFileName(securityScore.grade);
+const ogImage = {
+  url: `${env.SITE_BASE_URL}/grades/${ogImagePath}`,
+  secureUrl: `${env.SITE_BASE_URL}/grades/${ogImagePath}`,
+  alt: ogTitle,
+  width: 2400,
+  height: 972,
+  type: "image/png",
+};
+
 const metadata: SEOProps = {
   ...defaultMetadata,
-  title: `Quantum Security Report for ${address}`,
-  canonical: `${env.SITE_BASE_URL}/quantum-security-checker`,
+  title: `Quantus Report Card`,
+  canonical: ogCanonical,
   openGraph: {
     ...defaultMetadata.openGraph,
     basic: {
       ...defaultMetadata.openGraph!.basic,
-      title: `Your Ethereum Wallet's Quantum Security Score is ${securityScore.score}`,
+      url: ogCanonical,
+      image: ogImage.url,
+      title: ogTitle,
     },
+    image: ogImage,
     optional: {
       ...defaultMetadata.openGraph!.optional,
-      description: `Is your wallet safe from future quantum attacks? See a detailed security analysis for wallet ${address}, including your grade, risk level, and steps to improve security.`,
+      description: ogDesc,
     },
   },
   twitter: {
     ...defaultMetadata.twitter,
-    title: `Your Ethereum Wallet's Quantum Security Score is ${securityScore.score}`,
-    description: `Is your wallet safe from future quantum attacks? See a detailed security analysis for wallet ${address}, including your grade, risk level, and steps to improve security.`,
+    site: ogCanonical,
+    image: ogImage.url,
+    imageAlt: ogTitle,
+    title: ogTitle,
+    description: ogDesc,
   },
 };
 ---
@@ -156,14 +177,14 @@ const metadata: SEOProps = {
           </svg>
           <div class="text-center">
             <span
-              class={`font-medium-title-mobile md:font-large-title ${getRiskColorClass(securityScore.riskLevel)}`}
+              class={`font-large-title ${getGradeColorClass(securityScore.grade)}`}
             >
-              {securityScore.score}
+              {securityScore.grade}
             </span>
             <span
               class="font-tag-mobile md:font-tag block text-[var(--color-text-content-secondary)]"
             >
-              Grade: {securityScore.grade}
+              Score: {securityScore.score}
             </span>
           </div>
         </div>
