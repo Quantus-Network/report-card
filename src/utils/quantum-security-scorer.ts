@@ -116,8 +116,8 @@ export const generateSecurityAnalysis = (
   addressData: EthereumAddressData,
 ): EthereumSecurityAnalysis => {
   const securityScore = calculateQuantumSecurityScore(addressData);
-
-  const publicKeyExposed = addressData.hasOutgoingTransactions;
+  
+  const publicKeyExposed = addressData.hasOutgoingTransactions && !addressData.isSmartContract;
 
   // Calculate exposure duration risk (0-1 scale)
   let exposureDurationRisk = 0;

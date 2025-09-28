@@ -193,14 +193,12 @@ const metadata: SEOProps = {
           <GeneralCard title="Risk Level" content={securityScore.riskLevel} />
           <GeneralCard
             title="Key Exposure"
-            content={analysisDetails.publicKeyExposed ? "EXPOSED" : "SECURE"}
+            content={addressData.isSmartContract ? "N/A" : analysisDetails.publicKeyExposed ? "EXPOSED" : "SECURE"}
           />
-          {addressData.isSmartContract && (
-            <GeneralCard
-              title="Address Type"
-              content="SMART CONTRACT"
-            />
-          )}
+        <GeneralCard
+            title="Address Type"
+            content={addressData.isSmartContract ? "SMART CONTRACT" : "EXTERNAL"}
+        />
           <GeneralCard
             title="Balance"
             content={`${addressData.balanceEth.toFixed(4)} ETH`}
@@ -213,6 +211,13 @@ const metadata: SEOProps = {
           Risk Factors
         </h2>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+        { addressData.isSmartContract ? (
+          <RiskFactorCard
+            title="Smart Contract Status"
+            content={`Smart contracts addresses are not derived from keys, so they cannot be directly compromised in the same way that external accounts can. However, smart contracts often hold large amounts of funds on behalf of their users, 
+                and these funds are typically secured by elliptic curve keys and are therefore vulnerable to a quantum attacker. More detailed analysis coming soon!`}
+          />
+        ) : (
           <RiskFactorCard
             title="Public Key Status"
             content={analysisDetails.publicKeyExposed
@@ -231,6 +236,7 @@ const metadata: SEOProps = {
                     : "N/A"
                 }, the overall risk increases.`}
           />
+        ) }
         </div>
       </section>
     </div>
