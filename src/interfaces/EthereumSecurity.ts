@@ -5,6 +5,7 @@ export interface EthereumAddressData {
   hasOutgoingTransactions: boolean;
   firstTransactionTimestamp?: number; // Unix timestamp of first outgoing transaction
   daysSinceFirstTransaction?: number; // Days since public key was exposed
+  isSmartContract: boolean; // Whether the address is a smart contract
 }
 
 export interface QuantumSecurityScore {

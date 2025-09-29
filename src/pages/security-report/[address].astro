@@ -17,32 +17,67 @@ import SphereDecoration from "@/components/ui/SphereDecoration.astro";
 import { ArrowRight, Hourglass } from "@lucide/astro";
 import ShareButton from "@/components/ui/ShareButton.astro";
 import Button from "@/components/ui/Button.astro";
+import AddressSearchForm from "@/components/ui/AddressSearchForm.astro";
 
-const response = await GET(Astro);
-const data = await response.json<EthereumAddressData>();
+let hasError = false;
+let errorMessage = "";
+let data: EthereumAddressData | null = null;
+let securityAnalysis: any = null;
+let securityScore: any = null;
+let addressData: any = null;
+let analysisDetails: any = null;
+let address: string = "";
 
-const securityAnalysis = generateSecurityAnalysis(data);
-const { securityScore, addressData, analysisDetails, address } =
-  securityAnalysis;
+try {
+  const response = await GET(Astro);
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to analyze address");
+  }
+
+  data = await response.json<EthereumAddressData>();
+  securityAnalysis = generateSecurityAnalysis(data);
+  ({ securityScore, addressData, analysisDetails, address } = securityAnalysis);
+} catch (error) {
+  hasError = true;
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  } else {
+    errorMessage = "An unexpected error occurred while analyzing the address.";
+  }
+  address = Astro.params.address || "Unknown Address";
+}
 
 // --- SVG GAUGE CALCULATIONS ---
-const radius = 90;
-const circumference = 2 * Math.PI * radius;
-const offset = circumference - (securityScore.score / 100) * circumference;
-
-const ogTitle = `Quantum Security Score: ${securityScore.score}, Grade ${securityScore.grade}`;
-const ogDesc =
-  "Is your wallet safe from future quantum attacks? Analyse any Ethereum address to get the score, grade, risk level and steps to improve security.";
-const ogCanonical = `${env.SITE_BASE_URL}/security-report/${address}`;
-const ogImagePath = getOgImageFileName(securityScore.grade);
-const ogImage = {
-  url: `${env.SITE_BASE_URL}/grades/${ogImagePath}`,
-  secureUrl: `${env.SITE_BASE_URL}/grades/${ogImagePath}`,
-  alt: ogTitle,
+let radius = 90;
+let circumference = 2 * Math.PI * radius;
+let offset = 0;
+let ogTitle = "Quantum Security Analysis";
+let ogDesc = "Is your wallet safe from future quantum attacks? Analyse any Ethereum address to get the score, grade, risk level and steps to improve security.";
+let ogCanonical = `${env.SITE_BASE_URL}/security-report/${address}`;
+let ogImage = {
+  url: `${env.SITE_BASE_URL}/grades/Qday_score_F.png`,
+  secureUrl: `${env.SITE_BASE_URL}/grades/Qday_score_F.png`,
+  alt: "Quantum Security Analysis",
   width: 2400,
   height: 972,
   type: "image/png",
 };
+
+if (!hasError && securityScore) {
+  offset = circumference - (securityScore.score / 100) * circumference;
+  ogTitle = `Quantum Security Score: ${securityScore.score}, Grade ${securityScore.grade}`;
+  const ogImagePath = getOgImageFileName(securityScore.grade);
+  ogImage = {
+    url: `${env.SITE_BASE_URL}/grades/${ogImagePath}`,
+    secureUrl: `${env.SITE_BASE_URL}/grades/${ogImagePath}`,
+    alt: ogTitle,
+    width: 2400,
+    height: 972,
+    type: "image/png",
+  };
+}
 
 const metadata: SEOProps = {
   ...defaultMetadata,
@@ -102,44 +137,75 @@ const metadata: SEOProps = {
         <h1
           class="font-medium-title-mobile md:font-medium-title lg:font-large-title text-[var(--color-text-title-primary)]"
         >
-          Quantum Security Report
+          {hasError ? "Analysis Error" : "Quantum Security Report"}
         </h1>
-        <p class="font-body mt-4 break-words">
-          <span class="font-large-body font-semibold">Analysis for wallet:</span
-          >
-          <br />
-          <strong class="font-tag hidden md:inline">{address}</strong>
-          <strong
-            class="min-[340px]:font-tag mx-auto block w-[235px] min-[340px]:w-[315px] md:hidden"
-            >{address}</strong
-          >
-        </p>
 
-        <div
-          class="mt-5 flex flex-col items-center justify-center gap-5 sm:flex-row"
-        >
-          <Button
-            variant="outline"
-            href={env.QUANTUS_RISK_CHECKER_URL}
-            class="order-2 sm:order-1"
-          >
-            <div class="flex items-center gap-2 min-[340px]:gap-4">
-              <span>Check another address</span>
-              <ArrowRight />
+        {hasError ? (
+          <div class="mt-8 max-w-2xl mx-auto">
+            <div class="p-6 rounded-lg bg-red-50 border border-red-200">
+              <h2 class="font-large-body font-semibold text-red-800 mb-3 text-center">
+                Unable to Analyze Address
+              </h2>
+              <p class="font-body text-red-700 mb-4 text-center">
+                {errorMessage}
+              </p>
+              <p class="font-body text-red-600 text-sm text-center mb-4">
+                <strong>Requested Address:</strong> {address}
+              </p>
+
+              <div class="mt-6">
+                <h3 class="font-large-body font-semibold text-[var(--color-text-title-primary)] text-center mb-4">
+                  Try Another Address
+                </h3>
+                <AddressSearchForm
+                  placeholder="Enter a valid Ethereum address..."
+                  buttonText="Analyze"
+                  showDescription={true}
+                />
+              </div>
             </div>
-          </Button>
-          <ShareButton
-            url={`${env.SITE_BASE_URL}/security-report/${address}`}
-            title="Quantum Security Report"
-            description={`Security analysis for wallet ${address}`}
-            className="order-1 sm:order-2"
-          />
-        </div>
+          </div>
+        ) : (
+          <>
+            <p class="font-body mt-4 break-words">
+              <span class="font-large-body font-semibold">Analysis for wallet:</span>
+              <br />
+              <strong class="font-tag hidden md:inline">{address}</strong>
+              <strong
+                class="min-[340px]:font-tag mx-auto block w-[235px] min-[340px]:w-[315px] md:hidden"
+                >{address}</strong
+              >
+            </p>
+
+            <div
+              class="mt-5 flex flex-col items-center justify-center gap-5 sm:flex-row"
+            >
+              <ShareButton
+                url={`${env.SITE_BASE_URL}/security-report/${address}`}
+                title="Quantum Security Report"
+                description={`Security analysis for wallet ${address}`}
+                className="order-1 sm:order-2"
+              />
+            </div>
+
+            <div class="mt-8 max-w-md mx-auto">
+              <h3 class="font-large-body font-semibold text-[var(--color-text-title-primary)] text-center mb-4">
+                Check Another Address
+              </h3>
+              <AddressSearchForm
+                placeholder="Enter another address..."
+                buttonText="Analyze"
+                showDescription={false}
+              />
+            </div>
+          </>
+        )}
       </header>
 
-      <section
-        class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16"
-      >
+      {!hasError && (
+        <section
+          class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16"
+        >
         <div
           class="relative mx-auto flex h-64 w-64 items-center justify-center md:h-80 md:w-80"
         >
@@ -194,8 +260,12 @@ const metadata: SEOProps = {
           <GeneralCard title="Risk Level" content={securityScore.riskLevel} />
           <GeneralCard
             title="Key Exposure"
-            content={analysisDetails.publicKeyExposed ? "EXPOSED" : "SECURE"}
+            content={addressData.isSmartContract ? "N/A" : analysisDetails.publicKeyExposed ? "EXPOSED" : "SECURE"}
           />
+        <GeneralCard
+            title="Address Type"
+            content={addressData.isSmartContract ? "SMART CONTRACT" : "EXTERNAL"}
+        />
           <GeneralCard
             title="Balance"
             content={`${addressData.balanceEth.toFixed(4)} ETH`}
@@ -208,29 +278,40 @@ const metadata: SEOProps = {
           Risk Factors
         </h2>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+        { addressData.isSmartContract ? (
           <RiskFactorCard
-            title="Public Key Status"
-            content={analysisDetails.publicKeyExposed
-              ? `Your public key has been exposed for the ${formatExposureDuration(
-                  analysisDetails.daysSinceExposure ?? 0,
-                )} since you sent your first transaction. This makes your wallet a potential target for quantum attacks.`
-              : "Your public key has not been exposed through outgoing transactions. This is a very strong security posture against quantum threats. To maintain this, consider using this address for receiving funds only."}
+            title="Smart Contract Status"
+            content={`Smart contracts addresses are not derived from keys, so they cannot be directly compromised in the same way that external accounts can. However, smart contracts often hold large amounts of funds on behalf of their users,
+                and these funds are typically secured by elliptic curve keys and are therefore vulnerable to a quantum attacker. More detailed analysis coming soon!`}
           />
-          <RiskFactorCard
-            title="Balance & Exposure"
-            content={`A high balance can make your wallet a more attractive target.
-                Combined with a public key that has been exposed for a long time
-                ${
-                  analysisDetails.daysSinceExposure
-                    ? `${formatExposureDuration(analysisDetails.daysSinceExposure)}`
-                    : "N/A"
-                }, the overall risk increases.`}
-          />
+        ) : (
+          <>
+            <RiskFactorCard
+              title="Public Key Status"
+              content={analysisDetails.publicKeyExposed
+                ? `Your public key has been exposed for the ${formatExposureDuration(
+                    analysisDetails.daysSinceExposure ?? 0,
+                  )} since you sent your first transaction. This makes your wallet a potential target for quantum attacks.`
+                : "Your public key has not been exposed through outgoing transactions. This is a very strong security posture against quantum threats. To maintain this, consider using this address for receiving funds only."}
+            />
+            <RiskFactorCard
+              title="Balance & Exposure"
+              content={addressData.balanceEth === 0
+                ? "This address is empty so no funds are at risk. Even if quantum computers become available, there would be nothing to steal from this wallet."
+                : analysisDetails.publicKeyExposed
+                  ? `A high balance can make your wallet a more attractive target. Combined with a public key that has been exposed for ${formatExposureDuration(analysisDetails.daysSinceExposure ?? 0)}, the overall risk increases significantly.`
+                  : "A high balance can make your wallet a more attractive target. However, since your public key has not been exposed through transactions, your quantum security risk remains relatively low."
+              }
+            />
+          </>
+        ) }
         </div>
       </section>
+      )}
     </div>
 
-    <section class="bg-advice">
+    {!hasError && (
+      <section class="bg-advice">
       <div
         class="max-w-content mx-auto space-y-16 px-4 py-20 md:space-y-24 2xl:px-0"
       >
@@ -252,7 +333,8 @@ const metadata: SEOProps = {
         </ul>
       </div>
     </section>
-  </div>
+  )}
+</div>
 </Layout>
 
 <script>

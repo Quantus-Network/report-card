@@ -1,0 +1,126 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import env from "@/config";
+import defaultMetadata from "@/constants/default-metadata";
+import type { SEOProps } from "astro-seo";
+import SphereDecoration from "@/components/ui/SphereDecoration.astro";
+import AddressSearchForm from "@/components/ui/AddressSearchForm.astro";
+
+const ogCanonical = `${env.SITE_BASE_URL}`;
+const ogTitle = "Quantus Report Card - Quantum Security Analysis";
+const ogDesc = "Is your wallet safe from future quantum attacks? Analyse any Ethereum address to get the score, grade, risk level and steps to improve security.";
+
+const metadata: SEOProps = {
+  ...defaultMetadata,
+  title: `${env.SITE_NAME}`,
+  canonical: ogCanonical,
+  openGraph: {
+    ...defaultMetadata.openGraph,
+    basic: {
+      ...defaultMetadata.openGraph!.basic,
+      url: ogCanonical,
+      title: ogTitle,
+    },
+    optional: {
+      ...defaultMetadata.openGraph!.optional,
+      description: ogDesc,
+    },
+  },
+  twitter: {
+    ...defaultMetadata.twitter,
+    site: ogCanonical,
+    title: ogTitle,
+    description: ogDesc,
+  },
+};
+---
+
+<Layout {...metadata}>
+  <div id="home-page" class="relative overflow-hidden">
+    <div class="absolute -z-10 flex size-full flex-col items-center">
+      <SphereDecoration
+        class="absolute top-[21rem] -left-[5rem] md:top-[20rem] md:right-[8rem] md:left-auto"
+        variant="17"
+        size={241}
+      />
+      <SphereDecoration
+        class="absolute -right-[6rem] bottom-[54rem] md:top-[42rem] md:right-auto"
+        variant="18"
+        size={371}
+      />
+    </div>
+
+    <div class="flex flex-col items-center">
+      <span
+        class="font-giant-mobile lg:font-giant text-gradient-giant min-large-mobile:text-[54px] absolute top-4 -z-10 text-[44px] min-[642px]:top-8 min-[642px]:text-[92px] lg:top-2"
+        >SECURITY</span
+      >
+    </div>
+
+    <div
+      class="max-w-content mx-auto space-y-16 px-4 py-20 md:space-y-24 lg:pt-36 lg:pb-20 2xl:px-0"
+    >
+      <header class="text-center">
+        <h1
+          class="font-medium-title-mobile md:font-medium-title lg:font-large-title text-[var(--color-text-title-primary)]"
+        >
+          Quantum Security Analysis
+        </h1>
+        <p class="font-body md:font-large-body mt-4 max-w-2xl mx-auto text-[var(--color-text-content-secondary)]">
+          Is your wallet safe from future quantum attacks? Enter any Ethereum address to get a comprehensive security analysis with score, grade, risk level and recommendations.
+        </p>
+      </header>
+
+      <section class="max-w-md mx-auto">
+        <AddressSearchForm
+          placeholder="0x1234567890abcdef..."
+          buttonText="Analyze Security"
+          showDescription={true}
+        />
+      </section>
+
+      <section class="text-center max-w-4xl mx-auto">
+        <h2 class="font-medium-title-mobile md:font-medium-title mb-8">
+          What We Analyze
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="space-y-4">
+            <div class="w-16 h-16 mx-auto bg-gradient-to-r from-[var(--color-quantus-blue)] to-[var(--color-quantus-pink)] rounded-full flex items-center justify-center">
+              <span class="text-2xl">🔐</span>
+            </div>
+            <h3 class="font-large-body font-semibold text-[var(--color-text-title-primary)]">
+              Public Key Exposure
+            </h3>
+            <p class="font-body text-[var(--color-text-content-secondary)]">
+              Check if your public key has been exposed through outgoing transactions, making it vulnerable to quantum attacks.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="w-16 h-16 mx-auto bg-gradient-to-r from-[var(--color-quantus-blue)] to-[var(--color-quantus-pink)] rounded-full flex items-center justify-center">
+              <span class="text-2xl">‼️</span>
+            </div>
+            <h3 class="font-large-body font-semibold text-[var(--color-text-title-primary)]">
+              Risk Assessment
+            </h3>
+            <p class="font-body text-[var(--color-text-content-secondary)]">
+              Get a comprehensive security score and grade based on multiple risk factors including balance and exposure time.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="w-16 h-16 mx-auto bg-gradient-to-r from-[var(--color-quantus-blue)] to-[var(--color-quantus-pink)] rounded-full flex items-center justify-center">
+              <span class="text-2xl">💡</span>
+            </div>
+            <h3 class="font-large-body font-semibold text-[var(--color-text-title-primary)]">
+              Security Recommendations
+            </h3>
+            <p class="font-body text-[var(--color-text-content-secondary)]">
+              Receive personalized advice on how to improve your wallet's security against future quantum threats.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
