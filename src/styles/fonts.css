@@ -214,3 +214,24 @@
   line-height: 120%; /* 39.6px */
   letter-spacing: 0.99px;
 }
+@utility font-deadline {
+  font-family: Prompt;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 33.6px */
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+}
+@utility font-deadline-mobile {
+  font-family: Prompt;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 21.6px */
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
