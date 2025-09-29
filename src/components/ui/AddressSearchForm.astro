@@ -1,6 +1,8 @@
 ---
 import Button from "@/components/ui/Button.astro";
-import { Search } from "@lucide/astro";
+import { ArrowRight, Search } from "@lucide/astro";
+import Input from "./Input.astro";
+import { applyStyles } from "@/utils/apply-styles";
 
 export interface Props {
   placeholder?: string;
@@ -18,57 +20,56 @@ const {
 ---
 
 <div class={`address-search-form ${className}`}>
-  <form id="address-form" class="space-y-6">
-    <div class="space-y-2">
-      <label
-        for="ethereum-address"
-        class="font-large-body font-semibold text-[var(--color-text-title-primary)] block"
-      >
-        Ethereum Address
-      </label>
-      <div class="relative">
-        <input
-          type="text"
-          id="ethereum-address"
-          name="address"
-          placeholder={placeholder}
-          class="w-full px-4 py-3 pr-12 rounded-lg border border-[var(--color-button-outline)] bg-transparent text-[var(--color-text-title-primary)] placeholder-[var(--color-text-content-secondary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-quantus-blue)] focus:border-transparent"
-          required
-          pattern="^0x[a-fA-F0-9]{40}$"
-          title="Please enter a valid Ethereum address (0x followed by 40 hexadecimal characters)"
-        />
-        <Search class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--color-text-content-secondary)] w-5 h-5" />
-      </div>
-      {showDescription && (
-        <p class="font-body text-sm text-[var(--color-text-content-secondary)]">
-          Enter a valid Ethereum address starting with 0x
-        </p>
-      )}
-    </div>
+  <form
+    id="address-form"
+    method="post"
+    class={applyStyles(
+      "mt-10 flex flex-col items-center justify-center gap-5 sm:flex-row sm:items-stretch",
+      className,
+    )}
+  >
+    <Input
+      variant="outline"
+      aria-label="Ethereum Address"
+      class="md:!w-[567px]"
+      id="security-checker-input"
+      type="text"
+      name="address"
+      placeholder={"Enter your wallet address"}
+      required
+    />
 
     <Button
+      id="security-checker-button"
+      variant="secondary"
       type="submit"
-      variant="primary"
-      size="large"
-      class="w-full"
-      id="analyze-button"
+      class="w-[168px]"
     >
-      <div class="flex items-center gap-2">
-        <span>{buttonText}</span>
-      </div>
+      <span class="flex items-center gap-4">
+        Analyze
+        <ArrowRight />
+      </span>
     </Button>
   </form>
 
-  <div id="error-message" class="mt-4 hidden">
-    <div class="p-4 rounded-lg bg-red-100 border border-red-300">
+  <div
+    id="error-message"
+    class="mt-4 hidden md:mx-auto md:max-w-[calc(567px+168px)]"
+  >
+    <div class="rounded-lg border border-red-300 bg-red-100 p-4">
       <p class="font-body text-red-700" id="error-text"></p>
     </div>
   </div>
 
-  <div id="loading-message" class="mt-4 hidden">
-    <div class="p-4 rounded-lg bg-blue-100 border border-blue-300">
-      <p class="font-body text-blue-700 flex items-center gap-2">
-        <span class="animate-spin w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full"></span>
+  <div
+    id="loading-message"
+    class="mt-4 hidden md:mx-auto md:max-w-[calc(567px+168px)]"
+  >
+    <div class="rounded-lg border border-blue-300 bg-blue-100 p-4">
+      <p class="font-body flex items-center gap-2 text-blue-700">
+        <span
+          class="h-4 w-4 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"
+        ></span>
         Analyzing address...
       </p>
     </div>
@@ -77,62 +78,74 @@ const {
 
 <script>
   function initializeAddressForm() {
-    const form = document.getElementById('address-form') as HTMLFormElement;
-    const errorMessage = document.getElementById('error-message') as HTMLElement;
-    const errorText = document.getElementById('error-text') as HTMLElement;
-    const loadingMessage = document.getElementById('loading-message') as HTMLElement;
-    const analyzeButton = document.getElementById('analyze-button') as HTMLButtonElement;
+    const form = document.getElementById("address-form") as HTMLFormElement;
+    const errorMessage = document.getElementById(
+      "error-message",
+    ) as HTMLElement;
+    const errorText = document.getElementById("error-text") as HTMLElement;
+    const loadingMessage = document.getElementById(
+      "loading-message",
+    ) as HTMLElement;
+    const analyzeButton = document.getElementById(
+      "analyze-button",
+    ) as HTMLButtonElement;
 
     if (!form) return;
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const formData = new FormData(form);
-      const address = (formData.get('address') as string)?.trim();
+      const address = (formData.get("address") as string)?.trim();
 
       // Hide previous messages
-      errorMessage?.classList.add('hidden');
-      loadingMessage?.classList.remove('hidden');
+      errorMessage?.classList.add("hidden");
+      loadingMessage?.classList.remove("hidden");
       if (analyzeButton) analyzeButton.disabled = true;
 
       try {
         // Validate Ethereum address format
         if (!address) {
-          throw new Error('Please enter an Ethereum address');
+          throw new Error("Please enter an Ethereum address");
         }
 
-        if (!address.startsWith('0x')) {
+        if (!address.startsWith("0x")) {
           throw new Error('Ethereum address must start with "0x"');
         }
 
         if (address.length !== 42) {
-          throw new Error('Ethereum address must be exactly 42 characters long (0x + 40 hex characters)');
+          throw new Error(
+            "Ethereum address must be exactly 42 characters long (0x + 40 hex characters)",
+          );
         }
 
         const ethAddressRegex = /^0x[a-fA-F0-9]{40}$/;
         if (!ethAddressRegex.test(address)) {
-          throw new Error('Ethereum address contains invalid characters. Only 0-9 and a-f are allowed after "0x"');
+          throw new Error(
+            'Ethereum address contains invalid characters. Only 0-9 and a-f are allowed after "0x"',
+          );
         }
 
         // Navigate to the security report page
         window.location.href = `/security-report/${address}`;
-
       } catch (error) {
         // Show error message
-        loadingMessage?.classList.add('hidden');
+        loadingMessage?.classList.add("hidden");
         if (errorText) {
-          errorText.textContent = error instanceof Error ? error.message : 'An error occurred while processing your request';
+          errorText.textContent =
+            error instanceof Error
+              ? error.message
+              : "An error occurred while processing your request";
         }
-        errorMessage?.classList.remove('hidden');
+        errorMessage?.classList.remove("hidden");
         if (analyzeButton) analyzeButton.disabled = false;
       }
     });
   }
 
   // Initialize when DOM is loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeAddressForm);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeAddressForm);
   } else {
     initializeAddressForm();
   }

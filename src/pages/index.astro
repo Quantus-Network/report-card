@@ -5,10 +5,18 @@ import defaultMetadata from "@/constants/default-metadata";
 import type { SEOProps } from "astro-seo";
 import SphereDecoration from "@/components/ui/SphereDecoration.astro";
 import AddressSearchForm from "@/components/ui/AddressSearchForm.astro";
+import QDayLogo from "@/assets/qday/q-day-logo.svg";
+import QDayMockup from "@/assets/qday/q-day-mockup.png";
+import Button from "@/components/ui/Button.astro";
+import AppBenefitCard from "@/components/ui/AppBenefitCard.astro";
+import Input from "@/components/ui/Input.astro";
+import { ArrowRight } from "@lucide/astro";
+import { Image } from "astro:assets";
 
 const ogCanonical = `${env.SITE_BASE_URL}`;
 const ogTitle = "Quantus Report Card - Quantum Security Analysis";
-const ogDesc = "Is your wallet safe from future quantum attacks? Analyse any Ethereum address to get the score, grade, risk level and steps to improve security.";
+const ogDesc =
+  "Is your wallet safe from future quantum attacks? Analyse any Ethereum address to get the score, grade, risk level and steps to improve security.";
 
 const metadata: SEOProps = {
   ...defaultMetadata,
@@ -33,94 +41,199 @@ const metadata: SEOProps = {
     description: ogDesc,
   },
 };
+
+const factors = [
+  {
+    title: "Public-key Exposure",
+    content:
+      "Whether the address has ever sent a transaction and revealed its key.",
+  },
+  {
+    title: "Balance Sensitivity",
+    content: "The higher the ETH balance, the more attractive the target.",
+  },
+];
+
+const analysis = [
+  "Safety Score: 35 - 100",
+  "Risk Level: Very High / High / Medium / Low / Very Low",
+  "Grade: F / D / C / B / A / A+",
+  "Key Exposure status: Exposed or Not yet exposed",
+  "Advice: practical next steps",
+];
 ---
 
 <Layout {...metadata}>
-  <div id="home-page" class="relative overflow-hidden">
-    <div class="absolute -z-10 flex size-full flex-col items-center">
+  <section class="overflow-hidden px-[30px] py-10 sm:py-[137px] 2xl:px-0">
+    <div class="max-w-content relative z-[1] mx-auto">
       <SphereDecoration
-        class="absolute top-[21rem] -left-[5rem] md:top-[20rem] md:right-[8rem] md:left-auto"
+        class="absolute -top-[6rem] -right-[4rem] -z-10"
         variant="17"
-        size={241}
+        size={248}
       />
       <SphereDecoration
-        class="absolute -right-[6rem] bottom-[54rem] md:top-[42rem] md:right-auto"
+        class="absolute -bottom-[12rem] -left-[7rem] -z-10"
         variant="18"
-        size={371}
+        size={362}
+      />
+      <p class="font-tag-caps-mobile sm:font-tag-caps mb-5 text-center">
+        QUANTUM RISK CHECKER
+      </p>
+
+      <h1
+        class="font-large-title-mobile text-quantus-yellow lg:font-large-title min-large-mobile:text-[50px] mb-[18px] text-center text-[38px]"
+      >
+        Are you safe on Qday?
+      </h1>
+
+      <p
+        class="font-body-mobile lg:font-body mx-auto max-w-[790px] text-center"
+      >
+        Analyze your Ethereum address for quantum computing vulnerabilities. Our
+        tool checks transaction history and balance to provide a comprehensive
+        quantum security risk assessment.
+      </p>
+
+      <AddressSearchForm />
+    </div>
+  </section>
+
+  <div id="report-card-container" class="flex flex-col"></div>
+
+  <section class="bg-quantus-yellow px-6 py-[100px] md:px-[114px]">
+    <div
+      class="max-w-content mx-auto flex flex-col gap-8 lg:flex-row lg:gap-15"
+    >
+      <div class="flex flex-col gap-5 lg:w-1/2">
+        <h2
+          class="font-deadline-mobile sm:font-deadline text-text-content-black"
+        >
+          The Quantum Deadline
+        </h2>
+
+        <QDayLogo class="w-full max-w-[395px]" />
+      </div>
+
+      <div class="lg:w-1/2">
+        <p class="font-body text-text-content-black">
+          Q-Day is the moment when quantum computers can break the cryptography
+          that secures most of today's digital world. The algorithms behind
+          secure web connections, software updates, banking systems, and email,
+          such as RSA and elliptic-curve cryptography, would no longer be safe.
+          <strong class="font-semibold"
+            >Even data encrypted years earlier could be harvested now and
+            decrypted later, exposing confidential information across
+            governments, businesses, and individuals.</strong
+          >
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-[100px] md:px-[114px]">
+    <div
+      class="max-w-content mx-auto flex flex-col gap-8 lg:flex-row lg:gap-15"
+    >
+      <div class="flex flex-col gap-5 lg:w-1/2">
+        <h2 class="font-small-title sm:font-medium-title-mobile max-w-[500px]">
+          What does Q-day mean for Blockchains and Digital Assets
+        </h2>
+      </div>
+
+      <div class="lg:w-1/2">
+        <p class="font-body">
+          Blockchains depend on elliptic-curve digital signatures to prove
+          ownership of funds. On Ethereum for example, every outgoing
+          transaction permanently exposes a wallet's public key.
+          <strong class="font-semibold"
+            >A quantum computer could use a public key to mathematically derive
+            the private key, allowing attackers to forge valid signatures and
+            transfer assets without the owners knowledge.</strong
+          >
+          A network-wide scramble to adopt quantum-safe protocols would follow, but
+          by then unprepared chains could already be compromised.
+
+          <br />
+          <br />
+
+          <strong class="font-semibold"
+            >Use our
+            <span class="text-quantus-yellow underline"
+              >Quantum Risk Scanner</span
+            >
+            to see how vulnerable your address is and take action before Qday.</strong
+          >
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="bg-qday-tool relative z-[1] overflow-hidden px-6 py-[100px] md:px-[114px]"
+  >
+    <div class="flex justify-center">
+      <SphereDecoration
+        class="absolute -top-[9rem] -z-10 hidden opacity-25 !blur-none lg:block"
+        variant="14"
+        size={551}
       />
     </div>
 
-    <div class="flex flex-col items-center">
-      <span
-        class="font-giant-mobile lg:font-giant text-gradient-giant min-large-mobile:text-[54px] absolute top-4 -z-10 text-[44px] min-[642px]:top-8 min-[642px]:text-[92px] lg:top-2"
-        >SECURITY</span
-      >
-    </div>
-
-    <div
-      class="max-w-content mx-auto space-y-16 px-4 py-20 md:space-y-24 lg:pt-36 lg:pb-20 2xl:px-0"
-    >
-      <header class="text-center">
-        <h1
-          class="font-medium-title-mobile md:font-medium-title lg:font-large-title text-[var(--color-text-title-primary)]"
-        >
-          Quantum Security Analysis
-        </h1>
-        <p class="font-body md:font-large-body mt-4 max-w-2xl mx-auto text-[var(--color-text-content-secondary)]">
-          Is your wallet safe from future quantum attacks? Enter any Ethereum address to get a comprehensive security analysis with score, grade, risk level and recommendations.
+    <div class="lg:max-w-content lg:mx-auto xl:flex xl:gap-14">
+      <div class="flex flex-col">
+        <h2 class="font-medium-title">How it Works</h2>
+        <p class="font-large-body mt-[10px] max-w-[637px]">
+          The Quantum Risk Scanner scans any Ethereum address and gives it a
+          Quantum Readiness Score, a Risk Level, and a Grade.
         </p>
-      </header>
 
-      <section class="max-w-md mx-auto">
-        <AddressSearchForm
-          placeholder="0x1234567890abcdef..."
-          buttonText="Analyze Security"
-          showDescription={true}
-        />
-      </section>
-
-      <section class="text-center max-w-4xl mx-auto">
-        <h2 class="font-medium-title-mobile md:font-medium-title mb-8">
-          What We Analyze
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="space-y-4">
-            <div class="w-16 h-16 mx-auto bg-gradient-to-r from-[var(--color-quantus-blue)] to-[var(--color-quantus-pink)] rounded-full flex items-center justify-center">
-              <span class="text-2xl">🔐</span>
-            </div>
-            <h3 class="font-large-body font-semibold text-[var(--color-text-title-primary)]">
-              Public Key Exposure
-            </h3>
-            <p class="font-body text-[var(--color-text-content-secondary)]">
-              Check if your public key has been exposed through outgoing transactions, making it vulnerable to quantum attacks.
-            </p>
-          </div>
-
-          <div class="space-y-4">
-            <div class="w-16 h-16 mx-auto bg-gradient-to-r from-[var(--color-quantus-blue)] to-[var(--color-quantus-pink)] rounded-full flex items-center justify-center">
-              <span class="text-2xl">‼️</span>
-            </div>
-            <h3 class="font-large-body font-semibold text-[var(--color-text-title-primary)]">
-              Risk Assessment
-            </h3>
-            <p class="font-body text-[var(--color-text-content-secondary)]">
-              Get a comprehensive security score and grade based on multiple risk factors including balance and exposure time.
-            </p>
-          </div>
-
-          <div class="space-y-4">
-            <div class="w-16 h-16 mx-auto bg-gradient-to-r from-[var(--color-quantus-blue)] to-[var(--color-quantus-pink)] rounded-full flex items-center justify-center">
-              <span class="text-2xl">💡</span>
-            </div>
-            <h3 class="font-large-body font-semibold text-[var(--color-text-title-primary)]">
-              Security Recommendations
-            </h3>
-            <p class="font-body text-[var(--color-text-content-secondary)]">
-              Receive personalized advice on how to improve your wallet's security against future quantum threats.
-            </p>
-          </div>
+        <div class="mx-auto mt-10 max-w-[500px] xl:hidden">
+          <Image
+            class="drop-shadow-app"
+            src={QDayMockup}
+            alt="QDay's phone view"
+          />
         </div>
-      </section>
+
+        <p class="font-large-body mt-10 font-semibold">
+          Two primary risk factors drive the score:
+        </p>
+        <div class="mt-[18px] flex flex-col gap-[35px] sm:flex-row">
+          {
+            factors.map((factor: any) => (
+              <AppBenefitCard
+                class="lg:w-[352px]"
+                title={factor.title}
+                content={factor.content}
+              />
+            ))
+          }
+        </div>
+
+        <div class="mt-[35px] max-w-[591px]">
+          <p class="font-large-body">
+            From these signals we calculate a numerical score and map it to
+            simple, A-F Grades and Risk levels clear enough for you to act on.
+          </p>
+
+          <br />
+
+          <p class="font-large-body font-semibold">
+            What your analysis will provide:
+          </p>
+          <ul class="font-large-body list-disc ps-4">
+            {analysis.map((item: any) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="hidden lg:w-[348px] xl:block">
+        <Image
+          class="drop-shadow-app"
+          src={QDayMockup}
+          alt="QDay's phone view"
+        />
+      </div>
     </div>
-  </div>
+  </section>
 </Layout>

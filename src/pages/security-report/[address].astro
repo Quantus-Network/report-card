@@ -32,7 +32,7 @@ try {
   const response = await GET(Astro);
 
   if (!response.ok) {
-    const errorData = await response.json();
+    const errorData = await response.json() as any;
     throw new Error(errorData.error || "Failed to analyze address");
   }
 
@@ -188,14 +188,16 @@ const metadata: SEOProps = {
               />
             </div>
 
-            <div class="mt-8 max-w-md mx-auto">
+            <div class="mt-8 mx-auto">
               <h3 class="font-large-body font-semibold text-[var(--color-text-title-primary)] text-center mb-4">
                 Check Another Address
               </h3>
+
               <AddressSearchForm
                 placeholder="Enter another address..."
                 buttonText="Analyze"
                 showDescription={false}
+                class="mt-0"
               />
             </div>
           </>
@@ -320,7 +322,7 @@ const metadata: SEOProps = {
         </h2>
         <ul class="space-y-4">
           {
-            securityScore.recommendations.map((rec) => (
+            securityScore.recommendations.map((rec: any) => (
               <li class="flex max-w-[640px] items-start">
                 <Hourglass class="text-quantus-yellow mt-1 mr-4 flex shrink-0" />
 
