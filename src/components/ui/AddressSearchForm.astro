@@ -98,9 +98,21 @@ const {
 
       try {
         // Validate Ethereum address format
+        if (!address) {
+          throw new Error('Please enter an Ethereum address');
+        }
+
+        if (!address.startsWith('0x')) {
+          throw new Error('Ethereum address must start with "0x"');
+        }
+
+        if (address.length !== 42) {
+          throw new Error('Ethereum address must be exactly 42 characters long (0x + 40 hex characters)');
+        }
+
         const ethAddressRegex = /^0x[a-fA-F0-9]{40}$/;
         if (!ethAddressRegex.test(address)) {
-          throw new Error('Please enter a valid Ethereum address (0x followed by 40 hexadecimal characters)');
+          throw new Error('Ethereum address contains invalid characters. Only 0-9 and a-f are allowed after "0x"');
         }
 
         // Navigate to the security report page
