@@ -160,6 +160,14 @@
 @utility bg-app-download {
   background: linear-gradient(1deg, #0c1014 8.13%, #00f 54.27%, #ed4cce 97.13%);
 }
+@utility bg-qday-tool {
+  background: linear-gradient(
+    125deg,
+    #1f1fa3 22.67%,
+    #ed4cce 58.02%,
+    #ffe91f 96.17%
+  );
+}
 @utility bg-app-download-desktop {
   background: linear-gradient(
     45deg,
