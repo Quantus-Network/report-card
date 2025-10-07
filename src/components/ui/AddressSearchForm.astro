@@ -12,7 +12,7 @@ export interface Props {
 }
 
 const {
-  placeholder = "0x1234567890abcdef...",
+  placeholder = "0x1234567890abcdef... or vitalik.eth",
   buttonText = "Analyze Security",
   class: className = "",
   showDescription = true,
@@ -35,7 +35,7 @@ const {
       id="security-checker-input"
       type="text"
       name="address"
-      placeholder={"Enter your wallet address"}
+      placeholder={"Enter wallet address or ENS name"}
       required
     />
 
@@ -77,18 +77,44 @@ const {
 </div>
 
 <script>
+  // Validation functions
+  function isValidEthereumAddress(address: string): boolean {
+    const ethAddressRegex = /^0x[a-fA-F0-9]{40}$/;
+    return ethAddressRegex.test(address);
+  }
+
+  function isValidENSName(input: string): boolean {
+    if (!input || typeof input !== "string") return false;
+    const trimmed = input.trim().toLowerCase();
+    if (!trimmed.endsWith(".eth") || trimmed.startsWith("0x")) return false;
+    const ensPattern = /^[a-zA-Z0-9-]+\.eth$/;
+    return ensPattern.test(trimmed);
+  }
+
+  function validateAddressOrENS(input: string): { isValid: boolean; type: "address" | "ens" | "invalid" } {
+    if (!input || typeof input !== "string") {
+      return { isValid: false, type: "invalid" };
+    }
+
+    const cleanInput = input.trim();
+
+    if (isValidEthereumAddress(cleanInput)) {
+      return { isValid: true, type: "address" };
+    }
+
+    if (isValidENSName(cleanInput)) {
+      return { isValid: true, type: "ens" };
+    }
+
+    return { isValid: false, type: "invalid" };
+  }
+
   function initializeAddressForm() {
     const form = document.getElementById("address-form") as HTMLFormElement;
-    const errorMessage = document.getElementById(
-      "error-message",
-    ) as HTMLElement;
+    const errorMessage = document.getElementById("error-message") as HTMLElement;
     const errorText = document.getElementById("error-text") as HTMLElement;
-    const loadingMessage = document.getElementById(
-      "loading-message",
-    ) as HTMLElement;
-    const analyzeButton = document.getElementById(
-      "analyze-button",
-    ) as HTMLButtonElement;
+    const loadingMessage = document.getElementById("loading-message") as HTMLElement;
+    const analyzeButton = document.getElementById("analyze-button") as HTMLButtonElement;
 
     if (!form) return;
 
@@ -96,7 +122,7 @@ const {
       e.preventDefault();
 
       const formData = new FormData(form);
-      const address = (formData.get("address") as string)?.trim();
+      const input = (formData.get("address") as string)?.trim();
 
       // Hide previous messages
       errorMessage?.classList.add("hidden");
@@ -104,30 +130,20 @@ const {
       if (analyzeButton) analyzeButton.disabled = true;
 
       try {
-        // Validate Ethereum address format
-        if (!address) {
-          throw new Error("Please enter an Ethereum address");
+        if (!input) {
+          throw new Error("Please enter an Ethereum address or ENS name");
         }
 
-        if (!address.startsWith("0x")) {
-          throw new Error('Ethereum address must start with "0x"');
-        }
+        const validation = validateAddressOrENS(input);
 
-        if (address.length !== 42) {
+        if (!validation.isValid) {
           throw new Error(
-            "Ethereum address must be exactly 42 characters long (0x + 40 hex characters)",
+            "Please enter a valid Ethereum address (0x...) or ENS .eth name (example.eth)"
           );
         }
 
-        const ethAddressRegex = /^0x[a-fA-F0-9]{40}$/;
-        if (!ethAddressRegex.test(address)) {
-          throw new Error(
-            'Ethereum address contains invalid characters. Only 0-9 and a-f are allowed after "0x"',
-          );
-        }
-
-        // Navigate to the security report page
-        window.location.href = `/security-report/${address}`;
+        // Navigate to the security report page with the input (API will handle resolution)
+        window.location.href = `/security-report/${encodeURIComponent(input)}`;
       } catch (error) {
         // Show error message
         loadingMessage?.classList.add("hidden");
