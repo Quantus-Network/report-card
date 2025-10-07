@@ -22,33 +22,33 @@ export const GET: APIRoute = async ({ params }) => {
   // Resolve address or ENS name
   const resolution = await resolveAddressOrENS(address);
 
+  if (resolution.type === "invalid") {
+    return new Response(
+      JSON.stringify({
+        error: "Invalid address or ENS name format",
+        details:
+          "Please enter a valid Ethereum address (0x...) or ENS .eth name (example.eth).",
+        provided: address,
+      }),
+      {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+  }
+  
   if (!resolution.address) {
-    if (resolution.type === "invalid") {
-      return new Response(
-        JSON.stringify({
-          error: "Invalid address or ENS name format",
-          details:
-            "Please enter a valid Ethereum address (0x...) or ENS .eth name (example.eth).",
-          provided: address,
-        }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        },
-      );
-    } else {
-      return new Response(
-        JSON.stringify({
-          error: "ENS .eth name could not be resolved",
-          details: `The ENS name "${address}" could not be resolved to an Ethereum address. Please verify the .eth name is correct.`,
-          provided: address,
-        }),
-        {
-          status: 404,
-          headers: { "Content-Type": "application/json" },
-        },
-      );
-    }
+    return new Response(
+      JSON.stringify({
+        error: "ENS .eth name could not be resolved",
+        details: `The ENS name "${address}" could not be resolved to an Ethereum address. Please verify the .eth name is correct.`,
+        provided: address,
+      }),
+      {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   }
 
   const resolvedAddress = resolution.address;

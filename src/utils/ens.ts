@@ -2,10 +2,12 @@ import { createPublicClient, http } from "viem";
 import { mainnet } from "viem/chains";
 
 // Create a public client for mainnet using Infura
+const INFURA_API_KEY = import.meta.env.INFURA_API_KEY;
+
 const client = createPublicClient({
   chain: mainnet,
   transport: http(
-    "https://mainnet.infura.io/v3/71234860cfb7457db34b87b6c6b27eae",
+    `https://mainnet.infura.io/v3/${INFURA_API_KEY}`,
   ),
 });
 
