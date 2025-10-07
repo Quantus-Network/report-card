@@ -1,4 +1,5 @@
 import * as etherscan from "@/utils/etherscan";
+import { resolveAddressOrENS } from "@/utils/ens";
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ params }) => {
@@ -8,7 +9,8 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(
       JSON.stringify({
         error: "Address parameter is missing.",
-        details: "Please provide a valid Ethereum address in the URL.",
+        details:
+          "Please provide a valid Ethereum address or ENS name (.eth) in the URL.",
       }),
       {
         status: 400,
@@ -17,29 +19,48 @@ export const GET: APIRoute = async ({ params }) => {
     );
   }
 
-  const ethAddressRegex = /^0x[a-fA-F0-9]{40}$/;
-  if (!ethAddressRegex.test(address)) {
-    return new Response(
-      JSON.stringify({
-        error: "Invalid Ethereum address format",
-        details:
-          "Please enter a valid Ethereum address starting with '0x' followed by 40 hexadecimal characters.",
-        provided: address,
-      }),
-      {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      },
-    );
+  // Resolve address or ENS name
+  const resolution = await resolveAddressOrENS(address);
+
+  if (!resolution.address) {
+    if (resolution.type === "invalid") {
+      return new Response(
+        JSON.stringify({
+          error: "Invalid address or ENS name format",
+          details:
+            "Please enter a valid Ethereum address (0x...) or ENS .eth name (example.eth).",
+          provided: address,
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+    } else {
+      return new Response(
+        JSON.stringify({
+          error: "ENS .eth name could not be resolved",
+          details: `The ENS name "${address}" could not be resolved to an Ethereum address. Please verify the .eth name is correct.`,
+          provided: address,
+        }),
+        {
+          status: 404,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+    }
   }
+
+  const resolvedAddress = resolution.address;
+  const ensName = resolution.ensName;
 
   try {
-    // Fetch balance, check if has transactions, and detect smart contract
+    // Fetch balance, check if has transactions, and detect smart contract using resolved address
     const [balance, hasOutgoingTransactions, isSmartContract] =
       await Promise.all([
-        etherscan.getBalance(address),
-        etherscan.hasAnyTransactions(address),
-        etherscan.isSmartContract(address),
+        etherscan.getBalance(resolvedAddress),
+        etherscan.hasAnyTransactions(resolvedAddress),
+        etherscan.isSmartContract(resolvedAddress),
       ]);
 
     const balanceEth = etherscan.weiToEth(balance);
@@ -50,7 +71,7 @@ export const GET: APIRoute = async ({ params }) => {
     // If has transactions, get the timestamp in seconds of the first one
     if (hasOutgoingTransactions) {
       firstTransactionTimestamp =
-        await etherscan.getFirstTransactionTimestamp(address);
+        await etherscan.getFirstTransactionTimestamp(resolvedAddress);
     }
 
     if (hasOutgoingTransactions && firstTransactionTimestamp) {
@@ -63,7 +84,9 @@ export const GET: APIRoute = async ({ params }) => {
     }
 
     const report = {
-      address,
+      address: resolvedAddress,
+      ensName,
+      originalInput: address,
       balance,
       balanceEth,
       hasOutgoingTransactions,
@@ -108,7 +131,8 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(
       JSON.stringify({
         error: errorMessage,
-        address: address,
+        address: resolvedAddress || address,
+        originalInput: address,
         timestamp: new Date().toISOString(),
       }),
       {

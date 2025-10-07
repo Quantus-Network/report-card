@@ -158,7 +158,7 @@ const metadata: SEOProps = {
                   Try Another Address
                 </h3>
                 <AddressSearchForm
-                  placeholder="Enter a valid Ethereum address..."
+                  placeholder="Enter a valid Ethereum address or ENS name..."
                   buttonText="Analyze"
                   showDescription={true}
                 />
@@ -170,11 +170,27 @@ const metadata: SEOProps = {
             <p class="font-body mt-4 break-words">
               <span class="font-large-body font-semibold">Analysis for wallet:</span>
               <br />
-              <strong class="font-tag hidden md:inline">{address}</strong>
-              <strong
-                class="min-[340px]:font-tag mx-auto block w-[235px] min-[340px]:w-[315px] md:hidden"
-                >{address}</strong
-              >
+              {data?.ensName ? (
+                <>
+                  <strong class="font-tag hidden md:inline">{data.ensName}</strong>
+                  <strong
+                    class="min-[340px]:font-tag mx-auto block w-[235px] min-[340px]:w-[315px] md:hidden"
+                    >{data.ensName}</strong
+                  >
+                  <br />
+                  <span class="font-body text-[var(--color-text-content-secondary)] text-sm">
+                    ({address})
+                  </span>
+                </>
+              ) : (
+                <>
+                  <strong class="font-tag hidden md:inline">{address}</strong>
+                  <strong
+                    class="min-[340px]:font-tag mx-auto block w-[235px] min-[340px]:w-[315px] md:hidden"
+                    >{address}</strong
+                  >
+                </>
+              )}
             </p>
 
             <div
@@ -194,7 +210,7 @@ const metadata: SEOProps = {
               </h3>
 
               <AddressSearchForm
-                placeholder="Enter another address..."
+                placeholder="Enter another address or ENS name..."
                 buttonText="Analyze"
                 showDescription={false}
                 class="mt-0"
