@@ -1,5 +1,6 @@
 export interface EthereumAddressData {
   address: string;
+  ensName: string;
   balance: string; // in wei (string to handle large numbers)
   balanceEth: number; // converted to ETH for display
   hasOutgoingTransactions: boolean;
